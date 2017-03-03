@@ -1,4 +1,4 @@
-package com.zsf.accountbook;
+package com.zsf.accountbook.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -6,6 +6,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
+
+import com.zsf.accountbook.R;
+import com.zsf.accountbook.model.CostBean;
 
 import java.util.List;
 

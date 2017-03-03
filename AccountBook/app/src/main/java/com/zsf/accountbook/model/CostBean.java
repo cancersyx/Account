@@ -1,4 +1,4 @@
-package com.zsf.accountbook;
+package com.zsf.accountbook.model;
 
 import java.io.Serializable;
 

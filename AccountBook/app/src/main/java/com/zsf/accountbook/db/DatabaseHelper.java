@@ -1,10 +1,12 @@
-package com.zsf.accountbook;
+package com.zsf.accountbook.db;
 
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+
+import com.zsf.accountbook.model.CostBean;
 
 /**
  * Created by zsf on 2017/2/28.
