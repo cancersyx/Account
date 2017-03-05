@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="category">
+        <item>早午晚餐</item>
+        <item>购物</item>
+        <item>话费油费充值</item>
+    </string-array>
+
+    <string-array name="income_category">
+        <item>工资</item>
+        <item>兼职</item>
+        <item>奖金</item>
+    </string-array>
+</resources>

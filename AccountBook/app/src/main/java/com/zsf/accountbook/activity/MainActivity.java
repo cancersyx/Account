@@ -1,25 +1,20 @@
 package com.zsf.accountbook.activity;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.DatePicker;
-import android.widget.EditText;
 import android.widget.ListView;
 
-import com.zsf.accountbook.model.CostBean;
+import com.zsf.accountbook.R;
 import com.zsf.accountbook.adapter.CostListAdapter;
 import com.zsf.accountbook.db.DatabaseHelper;
-import com.zsf.accountbook.R;
+import com.zsf.accountbook.model.CostBean;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -49,29 +44,30 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-                LayoutInflater inflater = LayoutInflater.from(MainActivity.this);
-                View viewDialog = inflater.inflate(R.layout.new_cost_data,null);
-                final EditText title = (EditText) viewDialog.findViewById(R.id.et_cost_title);
-                final EditText money = (EditText) viewDialog.findViewById(R.id.et_cost_money);
-                final DatePicker date = (DatePicker) viewDialog.findViewById(R.id.dp_cost_date);
-                builder.setView(viewDialog);
-                builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                       CostBean costBean = new CostBean();
-                        costBean.costTitle = title.getText().toString();
-                        costBean.costMoney = money.getText().toString();
-                        costBean.costDate = date.getYear() + "-" + (date.getMonth() + 1)
-                                + "-"+ date.getDayOfMonth();
-                        mDatabase.insertCost(costBean);
-                        mCostBeanList.add(costBean);
-                        mAdapter.notifyDataSetChanged();
-
-                    }
-                });
-                builder.setNegativeButton("取消",null);
-                builder.create().show();
+//                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+//                LayoutInflater inflater = LayoutInflater.from(MainActivity.this);
+//                View viewDialog = inflater.inflate(R.layout.new_cost_data, null);
+//                final EditText title = (EditText) viewDialog.findViewById(R.id.et_cost_title);
+//                final EditText money = (EditText) viewDialog.findViewById(R.id.et_cost_money);
+//                final DatePicker date = (DatePicker) viewDialog.findViewById(R.id.dp_cost_date);
+//                builder.setView(viewDialog);
+//                builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialog, int which) {
+//                        CostBean costBean = new CostBean();
+//                        costBean.costTitle = title.getText().toString();
+//                        costBean.costMoney = money.getText().toString();
+//                        costBean.costDate = date.getYear() + "-" + (date.getMonth() + 1)
+//                                + "-" + date.getDayOfMonth();
+//                        mDatabase.insertCost(costBean);
+//                        mCostBeanList.add(costBean);
+//                        mAdapter.notifyDataSetChanged();
+//
+//                    }
+//                });
+//                builder.setNegativeButton("取消", null);
+//                builder.create().show();
+                startActivity(new Intent(MainActivity.this,MarkAccountActivity.class));
             }
         });
 
@@ -79,17 +75,9 @@ public class MainActivity extends AppCompatActivity {
 
     private void initDate() {
 //        mDatabase.deleteAllCostData();
-//        for (int i = 0; i < 5; i++) {
-//            CostBean costBean = new CostBean();
-//            costBean.costTitle = "mock";
-//            costBean.costDate = "2-28";
-//            costBean.costMoney = "20.0";
-////            mCostBeanList.add(costBean);
-//            mDatabase.insertCost(costBean);
-//        }
-        Cursor cursor =mDatabase.getAllCostData();
-        if (cursor != null){
-            while(cursor.moveToNext()){
+        Cursor cursor = mDatabase.getAllCostData();
+        if (cursor != null) {
+            while (cursor.moveToNext()) {
                 CostBean costBean = new CostBean();
                 costBean.costTitle = cursor.getString(cursor.getColumnIndex("cost_title"));
                 costBean.costDate = cursor.getString(cursor.getColumnIndex("cost_date"));
@@ -113,7 +101,7 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.action_chart) {
-            Intent intent = new Intent(MainActivity.this,ChartActivity.class);
+            Intent intent = new Intent(MainActivity.this, ChartActivity.class);
             intent.putExtra("cost_list", (Serializable) mCostBeanList);
             startActivity(intent);
             return true;
