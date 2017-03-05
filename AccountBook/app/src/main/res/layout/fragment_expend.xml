@@ -85,4 +85,12 @@
         android:textColorHint="@color/gray"
         android:textSize="20sp" />
 
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="确认"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@drawable/stroke_blue"/>
+
 </LinearLayout>

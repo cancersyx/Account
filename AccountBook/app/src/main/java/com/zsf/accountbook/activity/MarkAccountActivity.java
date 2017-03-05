@@ -35,7 +35,7 @@ public class MarkAccountActivity extends Activity implements View.OnClickListene
         incomeBtn.setOnClickListener(this);
         expendBtn.setOnClickListener(this);
 
-        initExpendFragment();
+        initExpendFragment();//先展示的是支出片段
     }
 
 
@@ -43,9 +43,11 @@ public class MarkAccountActivity extends Activity implements View.OnClickListene
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.btn_income:
+                expendBtn.setBackground(getResources().getDrawable(R.drawable.button_normal_bg));
                 initIncomeFragment();
                 break;
             case R.id.btn_expend:
+                incomeBtn.setBackground(getResources().getDrawable(R.drawable.button_normal_bg));
                 initExpendFragment();
                 break;
             default:
@@ -54,6 +56,7 @@ public class MarkAccountActivity extends Activity implements View.OnClickListene
     }
 
     private void initIncomeFragment() {
+        incomeBtn.setBackground(getResources().getDrawable(R.drawable.stroke_blue));
         IncomeFragment incomeFragment = new IncomeFragment();
         FragmentManager manager = getFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
@@ -62,6 +65,7 @@ public class MarkAccountActivity extends Activity implements View.OnClickListene
     }
 
     private void initExpendFragment() {
+        expendBtn.setBackground(getResources().getDrawable(R.drawable.stroke_blue));
         ExpendFragment expendFragment = new ExpendFragment();
         FragmentManager manager = getFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
