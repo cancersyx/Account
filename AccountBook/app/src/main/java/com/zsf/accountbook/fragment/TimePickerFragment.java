@@ -5,7 +5,11 @@ import android.app.DialogFragment;
 import android.app.TimePickerDialog;
 import android.os.Bundle;
 import android.text.format.DateFormat;
+import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
+
+import com.zsf.accountbook.R;
 
 import java.util.Calendar;
 
@@ -28,6 +32,9 @@ public class TimePickerFragment extends DialogFragment implements TimePickerDial
 
     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
         // Do something with the time chosen by the user
+        Toast.makeText(getActivity(),"时间是：" + hourOfDay + ":" + minute,Toast.LENGTH_SHORT).show();
+        TextView time = (TextView) getActivity().findViewById(R.id.tv_time);
+        time.setText(hourOfDay + ":" + minute);
     }
 
 }

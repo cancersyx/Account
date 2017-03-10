@@ -4,6 +4,7 @@ import android.app.DialogFragment;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,9 +31,12 @@ public class ExpendFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_expend, container, false);
         initView();
+        initData();
         initEvent();
+
         return view;
     }
+
 
     private void initView() {
         mInputMoney = (EditText) view.findViewById(R.id.et_input_money);
@@ -40,11 +44,18 @@ public class ExpendFragment extends Fragment {
         mCategory = (Spinner) view.findViewById(R.id.sp_category);
     }
 
+    private void initData() {
+        //默认显示系统时间
+        long sysTime = System.currentTimeMillis();
+        CharSequence sysTimeStr = DateFormat.format("HH:mm", sysTime);
+        mTime.setText(sysTimeStr);
+    }
+
     private void initEvent() {
         mTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getActivity(),"点击了时间",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "点击了时间", Toast.LENGTH_SHORT).show();
                 showTimeDialog();
             }
         });
@@ -53,6 +64,7 @@ public class ExpendFragment extends Fragment {
     private void showTimeDialog() {
         DialogFragment newFragment = new TimePickerFragment();
         newFragment.show(getFragmentManager(), "timePicker");
+
 
     }
 
