@@ -9,6 +9,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.zsf.accountbook.R;
@@ -71,7 +72,10 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        initEvent();
+
     }
+
 
     private void initDate() {
 //        mDatabase.deleteAllCostData();
@@ -90,6 +94,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    private void initEvent() {
+        mCostListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+            }
+        });
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -106,8 +119,6 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
             return true;
         }
-
-
         return super.onOptionsItemSelected(item);
     }
 }

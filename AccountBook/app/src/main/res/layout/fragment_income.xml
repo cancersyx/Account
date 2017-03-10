@@ -42,7 +42,7 @@
             android:textSize="20sp" />
 
         <TextView
-            android:id="@+id/tv_date"
+            android:id="@+id/tv_time"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/stroke_bg"
@@ -85,6 +85,7 @@
         android:textSize="20sp" />
 
     <Button
+        android:id="@+id/btn_ok"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="确认"

@@ -40,7 +40,6 @@ public class ExpendFragment extends Fragment {
     private List<CostBean> mCostBeanList;
     private CostListAdapter mAdapter;
 
-    private String mChooseSpinnerStr;
 
     @Nullable
     @Override
@@ -86,7 +85,7 @@ public class ExpendFragment extends Fragment {
             public void onClick(View v) {
                 CostBean costBean = new CostBean();
                 costBean.costTitle = (String) mCategory.getSelectedItem();
-                costBean.costMoney = mInputMoney.getText().toString();
+                costBean.costMoney = mInputMoney.getText().toString() + " 元";
                 costBean.costDate = mTime.getText().toString();
                 mDatabase.insertCost(costBean);
                 mCostBeanList.add(costBean);
