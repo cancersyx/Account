@@ -15,14 +15,19 @@ import com.zsf.accountbook.model.CostBean;
 public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String CREATE_COST = "create table cost ("
             + "id integer primary key autoincrement,"
-            + "cost_title varchar,"
+            + "cost_category varchar,"
             + "cost_date varchar,"
-            + "cost_money varchar)";
-    public static final String COST_TITLE = "cost_title";
+            + "cost_money varchar,"
+            + "cost_type varchar,"
+            + "cost_remark varchar)";
+
+    public static final String COST_CATEGORY = "cost_category";
     public static final String COST_DATE = "cost_date";
     public static final String COST_MONEY = "cost_money";
     public static final String COST = "cost";//表名
     public static final String DAILY_COST = "daily_cost";//数据库名
+    public static final String COST_TYPE = "cost_type";//收入，支出类型
+    public static final String COST_REMARK = "cost_remark";//备注
 
 
     /**
@@ -41,9 +46,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void insertCost(CostBean costBean) {
         SQLiteDatabase database = getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put(COST_TITLE, costBean.costTitle);
+        values.put(COST_CATEGORY, costBean.costCategory);
         values.put(COST_DATE, costBean.costDate);
         values.put(COST_MONEY, costBean.costMoney);
+        values.put(COST_TYPE,costBean.costType);
+        values.put(COST_REMARK,costBean.costRemark);
         database.insert(COST, null, values);
     }
 

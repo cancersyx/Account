@@ -13,7 +13,7 @@ import com.zsf.accountbook.model.CostBean;
 import java.util.List;
 
 /**
- * Created by zsf on 2017/2/28.
+ * Created by zsf
  */
 
 public class CostListAdapter extends BaseAdapter {
@@ -47,7 +47,7 @@ public class CostListAdapter extends BaseAdapter {
         if (convertView == null){
             holder = new ViewHolder();
             convertView = mInflater.inflate(R.layout.list_item,null);
-            holder.mTvCostTitle = (TextView) convertView.findViewById(R.id.tv_title);
+            holder.mTvCostCategory = (TextView) convertView.findViewById(R.id.tv_category);
             holder.mTvCostDate = (TextView) convertView.findViewById(R.id.tv_date);
             holder.mTvCostMoney = (TextView) convertView.findViewById(R.id.tv_money);
             convertView.setTag(holder);
@@ -55,7 +55,7 @@ public class CostListAdapter extends BaseAdapter {
             holder = (ViewHolder) convertView.getTag();
         }
         CostBean costBean = mList.get(position);//
-        holder.mTvCostTitle.setText(costBean.costTitle);
+        holder.mTvCostCategory.setText(costBean.costCategory);
         holder.mTvCostDate.setText(costBean.costDate);
         holder.mTvCostMoney.setText(costBean.costMoney);
 
@@ -64,7 +64,7 @@ public class CostListAdapter extends BaseAdapter {
 
 
     private static class ViewHolder{
-        public TextView mTvCostTitle;
+        public TextView mTvCostCategory;
         public TextView mTvCostDate;
         public TextView mTvCostMoney;
     }

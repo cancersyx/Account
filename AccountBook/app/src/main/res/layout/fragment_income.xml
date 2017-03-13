@@ -19,7 +19,7 @@
             android:textSize="20sp" />
 
         <EditText
-            android:id="@+id/et_input_money"
+            android:id="@+id/et_income_input_money"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/stroke_bg"
@@ -64,16 +64,18 @@
             android:text="类别："
             android:textSize="20sp" />
 
-        <Spinner
-            android:id="@+id/sp_category"
+        <TextView
+            android:id="@+id/tv_category"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:hint="工资"
             android:background="@drawable/stroke_bg"
-            android:entries="@array/income_category"
-            android:padding="10dp" />
+            android:textStyle="bold"
+            android:textSize="20sp" />
     </LinearLayout>
 
     <EditText
+        android:id="@+id/et_remark"
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:layout_margin="10dp"

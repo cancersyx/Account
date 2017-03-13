@@ -19,7 +19,7 @@ import lecho.lib.hellocharts.util.ChartUtils;
 import lecho.lib.hellocharts.view.LineChartView;
 
 /**
- * Created by zsf on 2017/3/2.
+ * Created by zsf.
  */
 
 public class ChartActivity extends Activity {

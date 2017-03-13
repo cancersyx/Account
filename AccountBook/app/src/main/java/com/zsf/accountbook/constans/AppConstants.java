@@ -1,7 +1,7 @@
 package com.zsf.accountbook.constans;
 
 /**
- * Created by zsf on 2017/3/3.
+ * Created by zsf
  */
 
 public class AppConstants {

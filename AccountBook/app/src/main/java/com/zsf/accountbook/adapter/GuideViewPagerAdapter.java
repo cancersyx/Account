@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import java.util.List;
 
 /**
- * Created by zsf on 2017/3/3.
+ * Created by zsf
  */
 
 public class GuideViewPagerAdapter extends PagerAdapter {

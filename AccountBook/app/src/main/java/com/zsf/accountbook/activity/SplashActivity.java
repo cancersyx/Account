@@ -10,7 +10,7 @@ import com.zsf.accountbook.R;
 import com.zsf.accountbook.utils.SpUtils;
 
 /**
- * Created by zsf on 2017/3/3.
+ * Created by zsf.
  */
 
 public class SplashActivity extends Activity {

@@ -30,6 +30,7 @@
             android:textStyle="bold" />
 
         <TextView
+            android:id="@+id/tv_date"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -49,9 +50,17 @@
 
     </LinearLayout>
 
+    <View
+        android:id="@+id/view"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginTop="5dp"
+        android:layout_below="@id/ll_category"
+        android:background="@color/blue"/>
+
     <ListView
         android:id="@+id/lv_main"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/ll_category" />
+        android:layout_below="@id/view" />
 </RelativeLayout>

@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by zsf on 2017/3/3.
+ * Created by zsf.
  */
 
 public class WelcomeGuideActivity extends Activity implements View.OnClickListener {
