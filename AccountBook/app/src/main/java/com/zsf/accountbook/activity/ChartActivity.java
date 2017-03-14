@@ -7,8 +7,6 @@ import android.widget.Button;
 import android.widget.FrameLayout;
 
 import com.zsf.accountbook.R;
-import com.zsf.accountbook.fragment.ExpendChartFragment;
-import com.zsf.accountbook.fragment.IncomeChartFragment;
 
 /**
  * Created by zsf.
@@ -19,10 +17,6 @@ public class ChartActivity extends Activity {
     private Button mIncomeChartBtn;
     private FrameLayout mContainer;
     private FrameLayout mContainer2;//支出片段容器
-
-    private ExpendChartFragment mExpendCharFragment;
-    private IncomeChartFragment mIncomeChartFragment;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
