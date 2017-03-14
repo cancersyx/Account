@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.text.format.DateFormat;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -114,7 +113,6 @@ public class IncomeFragment extends Fragment {
                 costBean.costDate = mTime.getText().toString();
                 costBean.costType = mIncomeButton.getText().toString();
                 costBean.costRemark = mRemarkEdt.getText().toString();
-                Log.d("zsf","button中的内容是:" +mIncomeButton.getText().toString());
                 mDatabase.insertCost(costBean);
                 mCostBeanList.add(costBean);
                 mAdapter.notifyDataSetChanged();
@@ -147,7 +145,7 @@ public class IncomeFragment extends Fragment {
     private void getData(){
         Intent intent = getActivity().getIntent();
         mInputMoney.setText(intent.getStringExtra("money"));
-        mCategoryTxt.setText(intent.getStringExtra("category"));//!!!!!!
+        mCategoryTxt.setText(intent.getStringExtra("category"));
         mRemarkEdt.setText(intent.getStringExtra("remark"));
     }
     private void showTimeDialog() {

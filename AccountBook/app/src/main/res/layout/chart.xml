@@ -2,13 +2,73 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="10dp">
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp">
+        <Button
+            android:id="@+id/btn_income"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="收入统计"
+            android:layout_marginLeft="5dp"
+            android:textSize="20sp"
+            android:background="@drawable/button_normal_bg"/>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@drawable/change"/>
+        <Button
+            android:id="@+id/btn_expend"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:layout_marginLeft="5dp"
+            android:text="支出统计"
+            android:textSize="20sp"
+            android:background="@drawable/button_normal_bg"/>
+    </LinearLayout>
 
 
-    <lecho.lib.hellocharts.view.LineChartView
-        android:id="@+id/chart"
+    <!--支出片段-->
+    <FrameLayout
+        android:id="@+id/fl_containe2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <fragment
+            android:name="com.zsf.accountbook.fragment.ExpendChartFragment"
+            android:id="@+id/expend_chart"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </fragment>
+
+    </FrameLayout>
+
+    <!--收入片段-->
+    <FrameLayout
+        android:id="@+id/fl_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="5dp"/>
+        android:visibility="gone">
+
+        <fragment
+            android:name="com.zsf.accountbook.fragment.IncomeChartFragment"
+            android:id="@+id/income_chart"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        </fragment>
+
+    </FrameLayout>
+
+
 </LinearLayout>

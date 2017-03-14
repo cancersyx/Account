@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -106,16 +105,12 @@ public class MainActivity extends AppCompatActivity {
                             mStr = "支出";
                             mRemarkStr = localCursor.getString(localCursor.getColumnIndex("cost_remark"));
                             skipToDetails(view);
-                            String nn = localCursor.getString(localCursor.getColumnIndex("cost_type"));
-                            Log.d("zsf","选择的item类型是(支出)：" + nn);
                         }else if (localCursor.getString(
                                 localCursor.getColumnIndex("cost_type")).equals("收入") && (position
                                 == localCursor.getInt(localCursor.getColumnIndex("id")))){
                             mStr = "收入";
                             mRemarkStr = localCursor.getString(localCursor.getColumnIndex("cost_remark"));
                             skipToDetails(view);
-                            String nn = localCursor.getString(localCursor.getColumnIndex("cost_type"));
-                            Log.d("zsf","选择的item类型是(收入)：" + nn);
                         }
                     } while (localCursor.moveToNext());
                 }

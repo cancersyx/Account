@@ -2,73 +2,72 @@ package com.zsf.accountbook.activity;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.FrameLayout;
 
-import com.zsf.accountbook.model.CostBean;
 import com.zsf.accountbook.R;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
-
-import lecho.lib.hellocharts.model.Line;
-import lecho.lib.hellocharts.model.LineChartData;
-import lecho.lib.hellocharts.model.PointValue;
-import lecho.lib.hellocharts.model.ValueShape;
-import lecho.lib.hellocharts.util.ChartUtils;
-import lecho.lib.hellocharts.view.LineChartView;
+import com.zsf.accountbook.fragment.ExpendChartFragment;
+import com.zsf.accountbook.fragment.IncomeChartFragment;
 
 /**
  * Created by zsf.
  */
 
 public class ChartActivity extends Activity {
+    private Button mExpendChartBtn;
+    private Button mIncomeChartBtn;
+    private FrameLayout mContainer;
+    private FrameLayout mContainer2;//支出片段容器
 
-    private LineChartView mChart;
-    private Map<String,Integer> table = new TreeMap<>();
-    private LineChartData mChartData;
+    private ExpendChartFragment mExpendCharFragment;
+    private IncomeChartFragment mIncomeChartFragment;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.chart);
-        mChart = (LineChartView) findViewById(R.id.chart);
-        List<CostBean> allData = (List<CostBean>) getIntent().getSerializableExtra("cost_list");
-        generateValues(allData);
-        generateData();
+
+        initView();
+        initEvent();
+        mExpendChartBtn.setBackground(getResources().getDrawable(R.drawable.stroke_blue));
+
+
+
 
     }
 
-    private void generateData() {
-        List<Line> lines = new ArrayList<>();
-        List<PointValue> values = new ArrayList<>();
-        int index = 0;
-        for (Integer value : table.values()) {
-            values.add(new PointValue(index,value));
-        }
-        Line line = new Line(values);
-        line.setColor(ChartUtils.COLOR_BLUE);
-        line.setShape(ValueShape.CIRCLE);
-        line.setPointColor(ChartUtils.COLOR_RED);
-        lines.add(line);
-
-        mChartData = new LineChartData(lines);
+    private void initView() {
+        mExpendChartBtn = (Button) findViewById(R.id.btn_expend);
+        mIncomeChartBtn = (Button) findViewById(R.id.btn_income);
+        mContainer = (FrameLayout) findViewById(R.id.fl_container);
+        mContainer2 = (FrameLayout) findViewById(R.id.fl_containe2);
 
     }
 
-    private void generateValues(List<CostBean> allData) {
-        if (allData != null){
-            for (int i = 0; i < allData.size(); i++) {
-                CostBean costBean = allData.get(i);
-                String costDate = costBean.costDate;
-                int costMoney = Integer.parseInt(costBean.costMoney);
-                if (!table.containsKey(costDate)){
-                    table.put(costDate,costMoney);
-                }else {
-                    int originMoney = table.get(costDate);
-                    table.put(costDate,originMoney + costMoney);
-                }
+    private void initEvent() {
+        mExpendChartBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mExpendChartBtn.setBackground(getResources().getDrawable(R.drawable.stroke_blue));
+                mIncomeChartBtn.setBackground(getResources().getDrawable(R.drawable.button_normal_bg));
+                mContainer2.setVisibility(View.VISIBLE);
+                mContainer.setVisibility(View.GONE);
             }
-        }
+        });
+
+        mIncomeChartBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mIncomeChartBtn.setBackground(getResources().getDrawable(R.drawable.stroke_blue));
+                mExpendChartBtn.setBackground(getResources().getDrawable(R.drawable.button_normal_bg));
+                mContainer.setVisibility(View.VISIBLE);
+                mContainer2.setVisibility(View.GONE);
+            }
+        });
+
     }
+
+
 }

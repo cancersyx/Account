@@ -4,14 +4,9 @@ import android.app.Activity;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.Spinner;
-import android.widget.TextView;
 
 import com.zsf.accountbook.R;
 import com.zsf.accountbook.fragment.ExpendFragment;
@@ -27,20 +22,6 @@ public class MarkAccountActivity extends Activity implements View.OnClickListene
     private Button incomeBtn;
     private Button mExpendButton;
     private LinearLayout linearLayout;
-
-    private EditText mInputMoneyOfExpand;
-    private TextView mTimeOfExpand;
-    private Spinner mCategoryOfExpand;
-
-    private EditText mInputMoneyOfIncome;
-    private TextView mTimeOfIncome;
-    private Spinner mCategoryOfIncome;
-
-    private View mViewExpendFragment;//支出Fragment
-    private View mViewIncomeFragment;//收入Fragment
-
-    private EditText mExpandRemarkEdt;//支出片段的备注
-    private EditText mIncomeRemarkEdt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,19 +42,6 @@ public class MarkAccountActivity extends Activity implements View.OnClickListene
         incomeBtn = (Button) findViewById(R.id.btn_income);
         mExpendButton = (Button) findViewById(R.id.btn_expend);
         linearLayout = (LinearLayout) findViewById(R.id.ll_fragment_container);
-
-        mViewExpendFragment = LayoutInflater.from(MarkAccountActivity.this).inflate(R.layout.fragment_expend,linearLayout,false);
-        mViewIncomeFragment = LayoutInflater.from(MarkAccountActivity.this).inflate(R.layout.fragment_income,linearLayout,false);
-
-        mInputMoneyOfExpand = (EditText) mViewExpendFragment.findViewById(R.id.et_input_money);
-        mTimeOfExpand = (TextView) mViewExpendFragment.findViewById(R.id.tv_time);
-        mCategoryOfExpand = (Spinner) mViewExpendFragment.findViewById(R.id.sp_category);
-        mExpandRemarkEdt = (EditText) mViewExpendFragment.findViewById(R.id.et_remark);
-
-        mInputMoneyOfIncome = (EditText) mViewIncomeFragment.findViewById(R.id.et_income_input_money);
-        mTimeOfIncome = (TextView) mViewIncomeFragment.findViewById(R.id.tv_time);
-        mCategoryOfIncome = (Spinner) mViewIncomeFragment.findViewById(R.id.sp_category);
-        mIncomeRemarkEdt = (EditText) mViewIncomeFragment.findViewById(R.id.et_remark);
 
     }
 
@@ -124,7 +92,6 @@ public class MarkAccountActivity extends Activity implements View.OnClickListene
     }
 
     private void initExpendFragment() {
-        Log.d("zsf","到这里没有");
         mExpendButton.setBackground(getResources().getDrawable(R.drawable.stroke_blue));
         ExpendFragment expendFragment = new ExpendFragment();
         FragmentManager manager = getFragmentManager();

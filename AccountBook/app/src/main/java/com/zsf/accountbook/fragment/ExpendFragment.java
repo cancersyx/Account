@@ -113,7 +113,6 @@ public class ExpendFragment extends Fragment {
                 costBean.costDate = mTime.getText().toString();
                 costBean.costType = mExpendButton.getText().toString();//保存支出类型到数据库
                 costBean.costRemark = mRemarkEdt.getText().toString();//保存备注到数据库
-                Log.d("zsf","button中的内容是:" +mExpendButton.getText().toString());
                 mDatabase.insertCost(costBean);
                 mCostBeanList.add(costBean);
                 mAdapter.notifyDataSetChanged();
@@ -145,7 +144,7 @@ public class ExpendFragment extends Fragment {
     private void getData() {
         Intent intent = getActivity().getIntent();
         mInputMoney.setText(intent.getStringExtra("money"));
-        mCategoryTxt.setText(intent.getStringExtra("category"));//!!!!!!
+        mCategoryTxt.setText(intent.getStringExtra("category"));
         mRemarkEdt.setText(intent.getStringExtra("remark"));
     }
 
