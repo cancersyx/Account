@@ -63,6 +63,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase database = getWritableDatabase();
         database.delete(COST,null,null);
     }
+
+    public void deleteOneData(long id){
+        SQLiteDatabase database = getWritableDatabase();
+        database.delete(COST,"id = ?", new String[]{Integer.toString((int) id)});
+    }
+
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 

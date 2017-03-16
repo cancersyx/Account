@@ -44,7 +44,7 @@ public class IncomeFragment extends Fragment {
     private Button mIncomeButton;
     private EditText mRemarkEdt;
 
-    private String[] arrs = {"工资","兼职","奖金","其他"};
+    private String[] arrs = {"工资","兼职","奖金","利息"};
 
     @Nullable
     @Override

@@ -24,8 +24,14 @@ import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 import com.github.mikephil.charting.utils.ColorTemplate;
 import com.zsf.accountbook.R;
+import com.zsf.accountbook.model.CostBean;
 
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.TreeMap;
 
 /**
  * Created by zsf on 2017/3/14.
@@ -33,18 +39,33 @@ import java.util.ArrayList;
 
 public class IncomeChartFragment extends Fragment implements OnChartValueSelectedListener {
     private PieChart mPieChart;
-    private String[] mParties = {"工资","奖金","兼职","其他"};
-
     private View view;
 
+    private Map<String,Integer> table = new TreeMap<>();
+    private List<CostBean> allData;
+    private List<Object> mKeys = new ArrayList<>();
+    private Object key;
+
+    private float mSalaryTotalMoney = 0.0f;
+    private float mPartTimeJobTotalMoney =0.0f;
+    private float mBonus = 0.0f;
+//    private float mOtherMoney = 0.0f;
+    private float mInterest = 0.0f;//利息收入
+    
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.income_fragment_chart,container,false);
-
+        
         initView();
         initEvent();
-        setData(4, 100);
+
+        allData = (List<CostBean>) getActivity().getIntent().getSerializableExtra("cost_list");
+        generateValues(allData);
+
+        getCategoryNumber();
+        
+        setData();
         return view;
     }
 
@@ -55,7 +76,6 @@ public class IncomeChartFragment extends Fragment implements OnChartValueSelecte
         mPieChart.setExtraOffsets(5, 10, 5, 5);//设置间距
         mPieChart.setDragDecelerationFrictionCoef(0.95f);
 //        mPieChart.setCenterTextTypeface(mTfLight);//设置饼状图中间文字字体
-        mPieChart.setCenterText(generateCenterSpannableText());//设置中间文字内容
         mPieChart.setDrawHoleEnabled(true);//显示Chart空心
         mPieChart.setHoleColor(Color.WHITE);//圈中心空心颜色
 
@@ -79,17 +99,45 @@ public class IncomeChartFragment extends Fragment implements OnChartValueSelecte
 
     }
 
-    private void setData(int count,float range){
-        float mult = range;
+    /**
+     * 获得项目数量，即table中key的数量
+     */
+    private void getCategoryNumber() {
+        Set entries = table.entrySet();
+        if (entries != null){
+            Iterator iterator = entries.iterator();
+            while (iterator.hasNext()){
+                Map.Entry entry = (Map.Entry) iterator.next();
+                key = entry.getKey();
+                mKeys.add(key);
+            }
+        }
+    }
 
+    private void setData(){
         ArrayList<PieEntry> entries = new ArrayList<PieEntry>();
 
         // NOTE: The order of the entries when being added to the entries array determines their position around the center of
         // the chart.
-        for (int i = 0; i < count ; i++) {
-            entries.add(new PieEntry((float) ((Math.random() * mult) + mult / 5),
-                    mParties[i % mParties.length]));
+        for (int i = 0; i < allData.size(); i++) {
+            if (!(table.get("工资") == null))
+                mSalaryTotalMoney = table.get("工资");
+            if (!(table.get("兼职") == null))
+                mPartTimeJobTotalMoney = table.get("兼职");
+            if (!(table.get("奖金") == null))
+                mBonus = table.get("奖金");
+            if (!(table.get("利息") == null))
+                mInterest = table.get("利息");
         }
+
+        if (!(mSalaryTotalMoney == 0))
+            entries.add(new PieEntry(mSalaryTotalMoney,"工资"));
+        if (!(mPartTimeJobTotalMoney == 0))
+            entries.add(new PieEntry(mPartTimeJobTotalMoney,"兼职"));
+        if (!(mBonus == 0))
+            entries.add(new PieEntry(mBonus,"奖金"));
+        if (!(mInterest == 0))
+            entries.add(new PieEntry(mInterest,"利息"));
 
         PieDataSet dataSet = new PieDataSet(entries, "选取的结果");
         dataSet.setSliceSpace(3f);//片之间的距离
@@ -129,11 +177,42 @@ public class IncomeChartFragment extends Fragment implements OnChartValueSelecte
 
         mPieChart.invalidate();
 
+        mPieChart.setCenterText("总计=" + showHoleCenterText());//设置中间文字内容
 
     }
 
+    /**
+     * 处理数据
+     * 将相同项目下的钱相加
+     * @param allData
+     */
+    private void generateValues(List<CostBean> allData){
+        if (allData != null){
+            for (int i = 0; i < allData.size(); i++) {
+                CostBean costBean = allData.get(i);
+                String costCategory = costBean.costCategory;
+                int costMoney = Integer.parseInt(costBean.costMoney);
+                if (!table.containsKey(costCategory)){
+                    table.put(costCategory,costMoney);
+                }else {
+                    int originMoney = table.get(costCategory);
+                    table.put(costCategory,originMoney + costMoney);
+                }
+
+
+            }
+        }
+
+    }
+
+
+    private String  showHoleCenterText(){
+        float sum = mSalaryTotalMoney + mPartTimeJobTotalMoney + mBonus + mInterest;
+        return Float.toString(sum);
+    }
     private SpannableString generateCenterSpannableText() {
-        SpannableString s = new SpannableString("MPAndroidChart\ndeveloped by Philipp Jahoda");
+        float sum = mSalaryTotalMoney + mPartTimeJobTotalMoney + mBonus + mInterest;
+        SpannableString s = new SpannableString("总计=" + Float.toString(sum));
         s.setSpan(new RelativeSizeSpan(1.7f), 0, 14, 0);
         s.setSpan(new StyleSpan(Typeface.NORMAL), 14, s.length() - 15, 0);
         s.setSpan(new ForegroundColorSpan(Color.GRAY), 14, s.length() - 15, 0);

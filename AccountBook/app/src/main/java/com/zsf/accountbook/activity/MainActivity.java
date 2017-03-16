@@ -1,5 +1,7 @@
 package com.zsf.accountbook.activity;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -119,7 +121,39 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        mCostListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                showDeleteDialog(id);
+
+                return true;
+            }
+        });
     }
+
+    private void showDeleteDialog(final long id) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("提示");
+        builder.setIcon(R.drawable.hint);
+        builder.setMessage("您确定要删除该条账单吗？");
+        builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+//                mDatabase.deleteAllCostData();
+                mDatabase.deleteOneData(id);
+                mAdapter.notifyDataSetChanged();
+            }
+        });
+        builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+            }
+        });
+        builder.setCancelable(false);
+        builder.create().show();
+    }
+
 
     private void skipToDetails(View view) {
         TextView moneyTxt = (TextView) view.findViewById(R.id.tv_money);
