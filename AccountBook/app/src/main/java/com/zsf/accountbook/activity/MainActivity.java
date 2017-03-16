@@ -12,7 +12,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,6 +19,7 @@ import com.zsf.accountbook.R;
 import com.zsf.accountbook.adapter.CostListAdapter;
 import com.zsf.accountbook.db.DatabaseHelper;
 import com.zsf.accountbook.model.CostBean;
+import com.zsf.accountbook.view.FlexibleListView;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -28,7 +28,7 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    private ListView mCostListView;
+    private FlexibleListView mCostListView;
     private List<CostBean> mCostBeanList;
     private DatabaseHelper mDatabase;
     private CostListAdapter mAdapter;
@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
     private void initView() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        mCostListView = (ListView) findViewById(R.id.lv_main);
+        mCostListView = (FlexibleListView) findViewById(R.id.lv_main);
         mDateTxt = (TextView) findViewById(R.id.tv_date);
         mFab = (FloatingActionButton) findViewById(R.id.fab);
 
@@ -125,7 +125,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
                 showDeleteDialog(id);
-
                 return true;
             }
         });
@@ -139,7 +138,6 @@ public class MainActivity extends AppCompatActivity {
         builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-//                mDatabase.deleteAllCostData();
                 mDatabase.deleteOneData(id);
                 mAdapter.notifyDataSetChanged();
             }
@@ -155,6 +153,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+
+
+    /**
+     *
+     * @param view
+     */
     private void skipToDetails(View view) {
         TextView moneyTxt = (TextView) view.findViewById(R.id.tv_money);
         TextView categoryTxt = (TextView) view.findViewById(R.id.tv_category);
