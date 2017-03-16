@@ -191,7 +191,7 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case R.id.more:
                 //TODO 增加更多功能的模块
-
+                startActivity(new Intent(this,MoreActivity.class));
                 break;
             case R.id.about_me:
                 startActivity(new Intent(MainActivity.this,AboutMeActivity.class));

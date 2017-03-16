@@ -22,9 +22,11 @@
             android:id="@+id/et_input_money"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/stroke_bg"
-            android:inputType="number"
+            android:background="@drawable/stroke_bg_blue"
+            android:gravity="center_vertical"
             android:hint="0.00"
+            android:inputType="number"
+            android:paddingLeft="5dp"
             android:textSize="20sp" />
     </LinearLayout>
 
@@ -45,9 +47,11 @@
             android:id="@+id/tv_time"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@drawable/spinner_bg"
+            android:gravity="center_vertical"
+            android:paddingLeft="5dp"
             android:text="10:00"
-            android:textSize="20sp"
-            android:background="@drawable/stroke_bg"/>
+            android:textSize="20sp" />
 
     </LinearLayout>
 
@@ -68,10 +72,12 @@
             android:id="@+id/tv_category"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@drawable/spinner_bg"
+            android:gravity="center_vertical"
             android:hint="早午晚餐"
+            android:paddingLeft="5dp"
             android:textSize="20sp"
-            android:textStyle="bold"
-            android:background="@drawable/stroke_green"/>
+            android:textStyle="bold" />
     </LinearLayout>
 
     <EditText
@@ -80,9 +86,9 @@
         android:layout_height="200dp"
         android:layout_margin="10dp"
         android:background="@drawable/stroke_blue"
+        android:gravity="left"
         android:hint="备注"
         android:padding="5dp"
-        android:gravity="left"
         android:textColorHint="@color/gray"
         android:textSize="20sp" />
 
@@ -90,9 +96,9 @@
         android:id="@+id/btn_ok"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="确认"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:background="@drawable/stroke_blue"/>
+        android:background="@drawable/stroke_blue"
+        android:text="确认" />
 
 </LinearLayout>

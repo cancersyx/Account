@@ -19,7 +19,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="收入统计"
-            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
             android:textSize="20sp"
             android:background="@drawable/button_normal_bg"/>
         <ImageView

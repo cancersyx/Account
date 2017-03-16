@@ -34,6 +34,7 @@
         <activity android:name=".activity.MarkAccountActivity"/>
         <activity android:name=".activity.AboutMeActivity"/>
         <activity android:name=".activity.SettingsActivity"/>
+        <activity android:name=".activity.MoreActivity"/>
     </application>
 
 </manifest>
