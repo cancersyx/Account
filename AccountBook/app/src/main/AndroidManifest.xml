@@ -32,6 +32,7 @@
             android:theme="@style/AppTheme.NoActionBar"/>
         <activity android:name=".activity.WelcomeGuideActivity"/>
         <activity android:name=".activity.MarkAccountActivity"/>
+        <activity android:name=".activity.AboutMeActivity"/>
     </application>
 
 </manifest>

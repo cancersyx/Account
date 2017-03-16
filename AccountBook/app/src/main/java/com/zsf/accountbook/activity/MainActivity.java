@@ -180,12 +180,23 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        if (id == R.id.action_chart) {
-            Intent intent = new Intent(MainActivity.this, ChartActivity.class);
-            intent.putExtra("cost_list", (Serializable) mCostBeanList);
-            startActivity(intent);
-            return true;
+        switch (item.getItemId()){
+            case R.id.action_chart:
+                Intent intent = new Intent(MainActivity.this, ChartActivity.class);
+                intent.putExtra("cost_list", (Serializable) mCostBeanList);
+                startActivity(intent);
+                break;
+            case R.id.settings:
+
+                break;
+            case R.id.more:
+
+                break;
+            case R.id.about_me:
+                startActivity(new Intent(MainActivity.this,AboutMeActivity.class));
+                break;
+            default:
+                break;
         }
         return super.onOptionsItemSelected(item);
     }
