@@ -71,7 +71,7 @@
             android:hint="早午晚餐"
             android:textSize="20sp"
             android:textStyle="bold"
-            android:background="@drawable/stroke_bg"/>
+            android:background="@drawable/stroke_green"/>
     </LinearLayout>
 
     <EditText

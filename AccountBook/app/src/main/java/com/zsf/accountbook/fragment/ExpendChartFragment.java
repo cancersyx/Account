@@ -187,7 +187,7 @@ public class ExpendChartFragment extends Fragment implements OnChartValueSelecte
 
         mPieChart.invalidate();
 
-        mPieChart.setCenterText("总计=" + showHoleCenterText());//设置中间文字内容
+        mPieChart.setCenterText("总计=" + showHoleCenterText() + "元");//设置中间文字内容
 
     }
 

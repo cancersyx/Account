@@ -133,7 +133,7 @@ public class MainActivity extends AppCompatActivity {
     private void showDeleteDialog(final long id) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("提示");
-        builder.setIcon(R.drawable.hint);
+        builder.setIcon(R.drawable.warning);
         builder.setMessage("您确定要删除该条账单吗？");
         builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
             @Override
@@ -187,9 +187,10 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
                 break;
             case R.id.settings:
-
+                startActivity(new Intent(this,SettingsActivity.class));
                 break;
             case R.id.more:
+                //TODO 增加更多功能的模块
 
                 break;
             case R.id.about_me:

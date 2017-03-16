@@ -212,7 +212,7 @@ public class IncomeChartFragment extends Fragment implements OnChartValueSelecte
     }
     private SpannableString generateCenterSpannableText() {
         float sum = mSalaryTotalMoney + mPartTimeJobTotalMoney + mBonus + mInterest;
-        SpannableString s = new SpannableString("总计=" + Float.toString(sum));
+        SpannableString s = new SpannableString("总计=" + Float.toString(sum) + "元");
         s.setSpan(new RelativeSizeSpan(1.7f), 0, 14, 0);
         s.setSpan(new StyleSpan(Typeface.NORMAL), 14, s.length() - 15, 0);
         s.setSpan(new ForegroundColorSpan(Color.GRAY), 14, s.length() - 15, 0);

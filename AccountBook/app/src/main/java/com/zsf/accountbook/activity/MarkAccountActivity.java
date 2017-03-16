@@ -6,7 +6,9 @@ import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.zsf.accountbook.R;
 import com.zsf.accountbook.fragment.ExpendFragment;
@@ -22,6 +24,8 @@ public class MarkAccountActivity extends Activity implements View.OnClickListene
     private Button incomeBtn;
     private Button mExpendButton;
     private LinearLayout linearLayout;
+    private ImageView mBack;
+    private TextView mTitle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +43,8 @@ public class MarkAccountActivity extends Activity implements View.OnClickListene
     }
 
     private void initView() {
+        mBack = (ImageView) findViewById(R.id.iv_back);
+        mTitle = (TextView) findViewById(R.id.tv_title);
         incomeBtn = (Button) findViewById(R.id.btn_income);
         mExpendButton = (Button) findViewById(R.id.btn_expend);
         linearLayout = (LinearLayout) findViewById(R.id.ll_fragment_container);
@@ -50,7 +56,12 @@ public class MarkAccountActivity extends Activity implements View.OnClickListene
     }
 
     private void initEvent(){
-
+        mBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
     private void getData() {
         if ((getIntent() != null) && (getIntent().getStringExtra("type") != null)

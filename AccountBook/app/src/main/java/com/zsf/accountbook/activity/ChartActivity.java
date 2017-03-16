@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.zsf.accountbook.R;
 
@@ -17,6 +19,8 @@ public class ChartActivity extends Activity {
     private Button mIncomeChartBtn;
     private FrameLayout mContainer;
     private FrameLayout mContainer2;//支出片段容器
+    private ImageView mBack;
+    private TextView mTitle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +37,9 @@ public class ChartActivity extends Activity {
     }
 
     private void initView() {
+        mBack = (ImageView) findViewById(R.id.iv_back);
+        mTitle = (TextView) findViewById(R.id.tv_title);
+        mTitle.setText("统计");
         mExpendChartBtn = (Button) findViewById(R.id.btn_expend);
         mIncomeChartBtn = (Button) findViewById(R.id.btn_income);
         mContainer = (FrameLayout) findViewById(R.id.fl_container);
@@ -41,6 +48,12 @@ public class ChartActivity extends Activity {
     }
 
     private void initEvent() {
+        mBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         mExpendChartBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
