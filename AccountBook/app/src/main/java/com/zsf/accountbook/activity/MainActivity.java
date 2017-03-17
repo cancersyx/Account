@@ -19,6 +19,7 @@ import com.zsf.accountbook.R;
 import com.zsf.accountbook.adapter.CostListAdapter;
 import com.zsf.accountbook.db.DatabaseHelper;
 import com.zsf.accountbook.model.CostBean;
+import com.zsf.accountbook.view.ArcPercentView;
 import com.zsf.accountbook.view.FlexibleListView;
 
 import java.io.Serializable;
@@ -59,6 +60,8 @@ public class MainActivity extends AppCompatActivity {
     private float mExpendSum = 0.0f;
     private float mBalance = 0.0f;
 
+    private ArcPercentView mArcPercentView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -83,6 +86,8 @@ public class MainActivity extends AppCompatActivity {
         mAllIncomeTxt = (TextView) findViewById(R.id.tv_all_income);
         mAllExpendTxt = (TextView) findViewById(R.id.tv_all_expend);
         mBalanceTxt = (TextView) findViewById(R.id.tv_balance);
+
+        mArcPercentView = (ArcPercentView) findViewById(R.id.arc_percent_view);
 
         mCostBeanList = new ArrayList<>();
         mDatabase = new DatabaseHelper(this);
@@ -117,9 +122,13 @@ public class MainActivity extends AppCompatActivity {
         mAllExpendTxt.setText(Float.toString(mExpendSum));
         if (mIncomeSum - mExpendSum >= 0){
             mBalance = mIncomeSum - mExpendSum;
-            mBalanceTxt.setText(Float.toString(mBalance));
+            float temp = mBalance / mIncomeSum;
+            mArcPercentView.setSweepValue(temp);
+//            mArcPercentView.setShowTxt("余额:"+ Float.toString(mBalance) + "元");
+            mBalanceTxt.setText("余额：\n" + Float.toString(mBalance) + "元");
         }else {
-            mBalanceTxt.setText(Float.toString(mBalance));//0.0f
+//            mArcPercentView.setShowTxt("余额：" + Float.toString(mBalance));
+            mBalanceTxt.setText("余额：\n" + Float.toString(mBalance) + "元");
         }
 
 

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingTop="5dp"
+    android:orientation="vertical"
     android:paddingBottom="5dp"
     android:paddingLeft="10dp"
     android:paddingRight="10dp">
@@ -11,72 +11,82 @@
         android:id="@+id/ll_all_income"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:layout_marginTop="20dp">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="20sp"
-            android:text="所有收入："/>
+            android:text="所有收入："
+            android:textSize="20sp" />
+
         <TextView
             android:id="@+id/tv_all_income"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="2000"
             android:textSize="20sp"
-            android:textStyle="bold"
-            android:text="2000"/>
+            android:textStyle="bold" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="20sp"
             android:layout_marginLeft="5dp"
-            android:text="元"/>
+            android:text="元"
+            android:textSize="20sp" />
     </LinearLayout>
 
 
     <LinearLayout
         android:id="@+id/ll_all_expend"
-        android:layout_below="@id/ll_all_income"
-        android:layout_marginTop="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@id/ll_all_income"
+        android:layout_marginTop="10dp"
         android:orientation="horizontal">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="20sp"
-            android:text="所有支出："/>
+            android:text="所有支出："
+            android:textSize="20sp" />
+
         <TextView
             android:id="@+id/tv_all_expend"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="1000"
             android:textSize="20sp"
-            android:textStyle="bold"
-            android:text="1000"/>
+            android:textStyle="bold" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="20sp"
             android:layout_marginLeft="5dp"
-            android:text="元"/>
+            android:text="元"
+            android:textSize="20sp" />
     </LinearLayout>
 
     <FrameLayout
-        android:layout_alignParentRight="true"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:background="@color/blue">
-        <ImageView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:background="@color/green"
-            android:layout_gravity="center"/>
+        android:layout_alignParentRight="true">
+
+        <com.zsf.accountbook.view.ArcPercentView
+            android:id="@+id/arc_percent_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center" />
+
         <TextView
             android:id="@+id/tv_balance"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:textColor="@color/white"
-            android:text="1000"/>
+            android:text="1000"
+            android:gravity="center"
+            android:textSize="16sp"
+            android:textColor="@color/white" />
     </FrameLayout>
 
 </RelativeLayout>
