@@ -24,7 +24,9 @@ import com.zsf.accountbook.view.FlexibleListView;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -37,6 +39,25 @@ public class MainActivity extends AppCompatActivity {
     private long exitTime = 0;
     private String mStr = "";
     private String mRemarkStr = "";
+
+    private TextView mAllExpendTxt;//所有支出
+    private TextView mAllIncomeTxt;//所有收入
+    private TextView mBalanceTxt;//余额
+    private Map<String,Integer> table = new HashMap<>();
+
+    private float mMealsTotalMoney = 0.0f;
+    private float mShoppingTotalMoney =0.0f;
+    private float mPhoneCharge = 0.0f;
+    private float mOilCharge = 0.0f;
+    private float mOtherMoney = 0.0f;
+    private float mSalaryTotalMoney = 0.0f;
+    private float mPartTimeJobTotalMoney =0.0f;
+    private float mBonus = 0.0f;
+    private float mInterest = 0.0f;//利息收入
+
+    private float mIncomeSum = 0.0f;
+    private float mExpendSum = 0.0f;
+    private float mBalance = 0.0f;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +79,10 @@ public class MainActivity extends AppCompatActivity {
         mCostListView = (FlexibleListView) findViewById(R.id.lv_main);
         mDateTxt = (TextView) findViewById(R.id.tv_date);
         mFab = (FloatingActionButton) findViewById(R.id.fab);
+
+        mAllIncomeTxt = (TextView) findViewById(R.id.tv_all_income);
+        mAllExpendTxt = (TextView) findViewById(R.id.tv_all_expend);
+        mBalanceTxt = (TextView) findViewById(R.id.tv_balance);
 
         mCostBeanList = new ArrayList<>();
         mDatabase = new DatabaseHelper(this);
@@ -83,8 +108,64 @@ public class MainActivity extends AppCompatActivity {
         int day = c.get(Calendar.DAY_OF_MONTH);
         mDateTxt.setText((month + 1) + "月" + day + "日");
 
+
+        generateAllValues(mCostBeanList);//处理所有的支出
+
+        mIncomeSum = mSalaryTotalMoney + mPartTimeJobTotalMoney + mBonus + mInterest;
+        mAllIncomeTxt.setText(Float.toString(mIncomeSum));
+        mExpendSum = mMealsTotalMoney + mShoppingTotalMoney + mPhoneCharge + mOilCharge + mOtherMoney;
+        mAllExpendTxt.setText(Float.toString(mExpendSum));
+        if (mIncomeSum - mExpendSum >= 0){
+            mBalance = mIncomeSum - mExpendSum;
+            mBalanceTxt.setText(Float.toString(mBalance));
+        }else {
+            mBalanceTxt.setText(Float.toString(mBalance));//0.0f
+        }
+
+
     }
 
+    /**
+     * 处理所有的支出，进行累加
+     * @param allData
+     */
+    private void generateAllValues(List<CostBean> allData) {
+        if (allData != null){
+            for (int i = 0; i < allData.size(); i++) {
+                CostBean costBean = allData.get(i);
+                String costCategory = costBean.costCategory;
+                int costMoney = Integer.parseInt(costBean.costMoney);
+                if (!table.containsKey(costCategory)){
+                    table.put(costCategory,costMoney);
+                }else {
+                    int originMoney = table.get(costCategory);
+                    table.put(costCategory,originMoney + costMoney);
+                }
+            }
+        }
+
+
+        for (int i = 0; i < allData.size(); i++) {
+            if (!(table.get("早午晚餐") == null))
+                mMealsTotalMoney = table.get("早午晚餐");
+            if (!(table.get("购物") == null))
+                mShoppingTotalMoney = table.get("购物");
+            if (!(table.get("话费") == null))
+                mPhoneCharge = table.get("话费");
+            if (!(table.get("油费") == null))
+                mOilCharge = table.get("油费");
+            if (!(table.get("其他") == null))
+                mOtherMoney = table.get("其他");
+            if (!(table.get("工资") == null))
+                mSalaryTotalMoney = table.get("工资");
+            if (!(table.get("兼职") == null))
+                mPartTimeJobTotalMoney = table.get("兼职");
+            if (!(table.get("奖金") == null))
+                mBonus = table.get("奖金");
+            if (!(table.get("利息") == null))
+                mInterest = table.get("利息");
+        }
+    }
 
     private void initEvent() {
         mFab.setOnClickListener(new View.OnClickListener() {

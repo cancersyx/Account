@@ -208,8 +208,6 @@ public class ExpendChartFragment extends Fragment implements OnChartValueSelecte
                     int originMoney = table.get(costCategory);
                     table.put(costCategory,originMoney + costMoney);
                 }
-
-
             }
         }
 

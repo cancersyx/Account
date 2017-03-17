@@ -13,7 +13,12 @@
     tools:context="com.zsf.accountbook.activity.MainActivity"
     tools:showIn="@layout/activity_main">
 
+    <include
+        android:id="@+id/ic_income_expend_home_show"
+        layout="@layout/income_expend_home_show"/>
+
     <LinearLayout
+        android:layout_below="@id/ic_income_expend_home_show"
         android:id="@+id/ll_category"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
