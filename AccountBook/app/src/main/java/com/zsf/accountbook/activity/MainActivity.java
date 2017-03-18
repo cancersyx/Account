@@ -44,15 +44,15 @@ public class MainActivity extends AppCompatActivity {
     private TextView mAllExpendTxt;//所有支出
     private TextView mAllIncomeTxt;//所有收入
     private TextView mBalanceTxt;//余额
-    private Map<String,Integer> table = new HashMap<>();
+    private Map<String, Integer> table = new HashMap<>();
 
     private float mMealsTotalMoney = 0.0f;
-    private float mShoppingTotalMoney =0.0f;
+    private float mShoppingTotalMoney = 0.0f;
     private float mPhoneCharge = 0.0f;
     private float mOilCharge = 0.0f;
     private float mOtherMoney = 0.0f;
     private float mSalaryTotalMoney = 0.0f;
-    private float mPartTimeJobTotalMoney =0.0f;
+    private float mPartTimeJobTotalMoney = 0.0f;
     private float mBonus = 0.0f;
     private float mInterest = 0.0f;//利息收入
 
@@ -113,21 +113,18 @@ public class MainActivity extends AppCompatActivity {
         int day = c.get(Calendar.DAY_OF_MONTH);
         mDateTxt.setText((month + 1) + "月" + day + "日");
 
-
         generateAllValues(mCostBeanList);//处理所有的支出
 
         mIncomeSum = mSalaryTotalMoney + mPartTimeJobTotalMoney + mBonus + mInterest;
         mAllIncomeTxt.setText(Float.toString(mIncomeSum));
         mExpendSum = mMealsTotalMoney + mShoppingTotalMoney + mPhoneCharge + mOilCharge + mOtherMoney;
         mAllExpendTxt.setText(Float.toString(mExpendSum));
-        if (mIncomeSum - mExpendSum >= 0){
+        if (mIncomeSum - mExpendSum >= 0) {
             mBalance = mIncomeSum - mExpendSum;
             float temp = mBalance / mIncomeSum;
             mArcPercentView.setSweepValue(temp);
-//            mArcPercentView.setShowTxt("余额:"+ Float.toString(mBalance) + "元");
             mBalanceTxt.setText("余额：\n" + Float.toString(mBalance) + "元");
-        }else {
-//            mArcPercentView.setShowTxt("余额：" + Float.toString(mBalance));
+        } else {
             mBalanceTxt.setText("余额：\n" + Float.toString(mBalance) + "元");
         }
 
@@ -136,23 +133,23 @@ public class MainActivity extends AppCompatActivity {
 
     /**
      * 处理所有的支出，进行累加
+     *
      * @param allData
      */
     private void generateAllValues(List<CostBean> allData) {
-        if (allData != null){
+        if (allData != null) {
             for (int i = 0; i < allData.size(); i++) {
                 CostBean costBean = allData.get(i);
                 String costCategory = costBean.costCategory;
                 int costMoney = Integer.parseInt(costBean.costMoney);
-                if (!table.containsKey(costCategory)){
-                    table.put(costCategory,costMoney);
-                }else {
+                if (!table.containsKey(costCategory)) {
+                    table.put(costCategory, costMoney);
+                } else {
                     int originMoney = table.get(costCategory);
-                    table.put(costCategory,originMoney + costMoney);
+                    table.put(costCategory, originMoney + costMoney);
                 }
             }
         }
-
 
         for (int i = 0; i < allData.size(); i++) {
             if (!(table.get("早午晚餐") == null))
@@ -189,17 +186,17 @@ public class MainActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 position = position + 1;
                 Cursor localCursor = mDatabase.getAllCostData();
-                if (localCursor != null && localCursor.moveToFirst()){
+                if (localCursor != null && localCursor.moveToFirst()) {
                     do {
                         if (localCursor.getString(
                                 localCursor.getColumnIndex("cost_type")).equals("支出") && (position
-                                == localCursor.getInt(localCursor.getColumnIndex("id")))){
+                                == localCursor.getInt(localCursor.getColumnIndex("id")))) {
                             mStr = "支出";
                             mRemarkStr = localCursor.getString(localCursor.getColumnIndex("cost_remark"));
                             skipToDetails(view);
-                        }else if (localCursor.getString(
+                        } else if (localCursor.getString(
                                 localCursor.getColumnIndex("cost_type")).equals("收入") && (position
-                                == localCursor.getInt(localCursor.getColumnIndex("id")))){
+                                == localCursor.getInt(localCursor.getColumnIndex("id")))) {
                             mStr = "收入";
                             mRemarkStr = localCursor.getString(localCursor.getColumnIndex("cost_remark"));
                             skipToDetails(view);
@@ -235,7 +232,7 @@ public class MainActivity extends AppCompatActivity {
         builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                    dialog.dismiss();
+                dialog.dismiss();
             }
         });
         builder.setCancelable(false);
@@ -243,10 +240,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-
-
     /**
-     *
      * @param view
      */
     private void skipToDetails(View view) {
@@ -258,7 +252,7 @@ public class MainActivity extends AppCompatActivity {
         intent.putExtra("money", moneyStr);
         intent.putExtra("category", categoryStr);
         intent.putExtra("type", mStr);
-        intent.putExtra("remark",mRemarkStr);
+        intent.putExtra("remark", mRemarkStr);
         startActivity(intent);
     }
 
@@ -270,21 +264,25 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case R.id.action_chart:
                 Intent intent = new Intent(MainActivity.this, ChartActivity.class);
                 intent.putExtra("cost_list", (Serializable) mCostBeanList);
                 startActivity(intent);
+                overridePendingTransition(R.anim.operate_in,R.anim.operate_out);
                 break;
             case R.id.settings:
-                startActivity(new Intent(this,SettingsActivity.class));
+                startActivity(new Intent(this, SettingsActivity.class));
+                overridePendingTransition(R.anim.operate_in,R.anim.operate_out);
                 break;
             case R.id.more:
                 //TODO 增加更多功能的模块
-                startActivity(new Intent(this,MoreActivity.class));
+                startActivity(new Intent(this, MoreActivity.class));
+                overridePendingTransition(R.anim.operate_in,R.anim.operate_out);
                 break;
             case R.id.about_me:
-                startActivity(new Intent(MainActivity.this,AboutMeActivity.class));
+                startActivity(new Intent(MainActivity.this, AboutMeActivity.class));
+                overridePendingTransition(R.anim.operate_in,R.anim.operate_out);
                 break;
             default:
                 break;

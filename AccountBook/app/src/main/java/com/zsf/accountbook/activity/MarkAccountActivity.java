@@ -83,10 +83,12 @@ public class MarkAccountActivity extends Activity implements View.OnClickListene
             case R.id.btn_income:
                 mExpendButton.setBackground(getResources().getDrawable(R.drawable.button_normal_bg));
                 initIncomeFragment();
+                overridePendingTransition(R.anim.operate_in,R.anim.operate_out);
                 break;
             case R.id.btn_expend:
                 incomeBtn.setBackground(getResources().getDrawable(R.drawable.button_normal_bg));
                 initExpendFragment();
+                overridePendingTransition(R.anim.operate_in,R.anim.operate_out);
                 break;
             default:
                 break;
