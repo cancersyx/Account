@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -33,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
 
     private FlexibleListView mCostListView;
     private List<CostBean> mCostBeanList;
-    private DatabaseHelper mDatabase;
+    private DatabaseHelper mDatabase;//数据库
     private CostListAdapter mAdapter;
     private TextView mDateTxt;
     private FloatingActionButton mFab;
@@ -60,7 +61,9 @@ public class MainActivity extends AppCompatActivity {
     private float mExpendSum = 0.0f;
     private float mBalance = 0.0f;
 
-    private ArcPercentView mArcPercentView;
+    private ArcPercentView mArcPercentView;//自定义弧形View
+
+    private List<String> mIdList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,23 +82,27 @@ public class MainActivity extends AppCompatActivity {
     private void initView() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        mCostListView = (FlexibleListView) findViewById(R.id.lv_main);
-        mDateTxt = (TextView) findViewById(R.id.tv_date);
-        mFab = (FloatingActionButton) findViewById(R.id.fab);
 
         mAllIncomeTxt = (TextView) findViewById(R.id.tv_all_income);
         mAllExpendTxt = (TextView) findViewById(R.id.tv_all_expend);
         mBalanceTxt = (TextView) findViewById(R.id.tv_balance);
-
         mArcPercentView = (ArcPercentView) findViewById(R.id.arc_percent_view);
+
+        mDateTxt = (TextView) findViewById(R.id.tv_date);
+        mFab = (FloatingActionButton) findViewById(R.id.fab);
+        mCostListView = (FlexibleListView) findViewById(R.id.lv_main);
 
         mCostBeanList = new ArrayList<>();
         mDatabase = new DatabaseHelper(this);
     }
 
+    /**
+     *
+     */
     private void initDate() {
         Cursor cursor = mDatabase.getAllCostData();
-        if (cursor != null) {
+        if (cursor != null && cursor.getCount() > 0) {
+            mIdList.removeAll(mIdList);
             while (cursor.moveToNext()) {
                 CostBean costBean = new CostBean();
                 costBean.costCategory = cursor.getString(cursor.getColumnIndex("cost_category"));
@@ -104,6 +111,7 @@ public class MainActivity extends AppCompatActivity {
                 costBean.costType = cursor.getString(cursor.getColumnIndex("cost_type"));
                 costBean.costRemark = cursor.getString(cursor.getColumnIndex("cost_remark"));
                 mCostBeanList.add(costBean);
+                mIdList.add(cursor.getString(0));
             }
             cursor.close();
         }
@@ -111,9 +119,9 @@ public class MainActivity extends AppCompatActivity {
         Calendar c = Calendar.getInstance();
         int month = c.get(Calendar.MONTH);
         int day = c.get(Calendar.DAY_OF_MONTH);
-        mDateTxt.setText((month + 1) + "月" + day + "日");
+        mDateTxt.setText((month + 1) + "月" + day + "日");//显示日期
 
-        generateAllValues(mCostBeanList);//处理所有的支出
+        generateAllValues(mCostBeanList);//处理数据
 
         mIncomeSum = mSalaryTotalMoney + mPartTimeJobTotalMoney + mBonus + mInterest;
         mAllIncomeTxt.setText(Float.toString(mIncomeSum));
@@ -132,7 +140,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     * 处理所有的支出，进行累加
+     * 处理所有的类别，金额进行累加
      *
      * @param allData
      */
@@ -203,7 +211,6 @@ public class MainActivity extends AppCompatActivity {
                         }
                     } while (localCursor.moveToNext());
                 }
-                Toast.makeText(getApplicationContext(), "点击的是：" + position, Toast.LENGTH_SHORT).show();
                 localCursor.close();
             }
         });
@@ -211,13 +218,13 @@ public class MainActivity extends AppCompatActivity {
         mCostListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                showDeleteDialog(id);
+                showDeleteDialog(position);
                 return true;
             }
         });
     }
 
-    private void showDeleteDialog(final long id) {
+    private void showDeleteDialog(final int position) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("提示");
         builder.setIcon(R.drawable.warning);
@@ -225,8 +232,8 @@ public class MainActivity extends AppCompatActivity {
         builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                mDatabase.deleteOneData(id);
-                mAdapter.notifyDataSetChanged();
+                mDatabase.deleteOneData(Integer.parseInt(mIdList.get(position)));
+                Log.d("zsf","输出List中的第一个数" + mIdList.get(0));
             }
         });
         builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
@@ -300,5 +307,18 @@ public class MainActivity extends AppCompatActivity {
             finish();
             System.exit(0);
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mCostListView.setAdapter(mAdapter);
+        mAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+
     }
 }

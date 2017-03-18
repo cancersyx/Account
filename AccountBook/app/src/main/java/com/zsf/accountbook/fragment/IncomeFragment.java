@@ -126,7 +126,7 @@ public class IncomeFragment extends Fragment {
     private void showSpinnerView() {
         new AlertDialog.Builder(getActivity())
                 //设置对话框图标
-                .setIcon(R.mipmap.ic_launcher)
+                .setIcon(R.drawable.warning)
                 //设置对话标题
                 .setTitle("选择项目")
                 //设置对话框显示的view

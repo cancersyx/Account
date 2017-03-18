@@ -64,9 +64,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         database.delete(COST,null,null);
     }
 
-    public void deleteOneData(long id){
+    public void deleteOneData(int id){
         SQLiteDatabase database = getWritableDatabase();
-        database.delete(COST,"id = ?", new String[]{Integer.toString((int) id)});
+        database.delete(COST,"id = ?", new String[]{Integer.toString(id)});
     }
 
     @Override

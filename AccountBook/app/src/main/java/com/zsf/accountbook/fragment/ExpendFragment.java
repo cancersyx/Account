@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.text.format.DateFormat;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -125,7 +124,7 @@ public class ExpendFragment extends Fragment {
     private void showSpinnerView() {
         new AlertDialog.Builder(getActivity())
                 //设置对话框图标
-                .setIcon(R.mipmap.ic_launcher)
+                .setIcon(R.drawable.warning)
                 //设置对话标题
                 .setTitle("选择项目")
                 //设置对话框显示的view
