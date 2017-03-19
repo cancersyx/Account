@@ -5,6 +5,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -64,6 +66,16 @@ public class MainActivity extends AppCompatActivity {
 
     private List<String> mIdList = new ArrayList<>();
 
+    private Handler handler = new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what){
+                case 0:
+
+
+            }
+        }
+    };
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -93,6 +105,23 @@ public class MainActivity extends AppCompatActivity {
 
         mCostBeanList = new ArrayList<>();
         mDatabase = new DatabaseHelper(this);
+    }
+
+
+    private void getDataFromSQL(){
+        Cursor cursor = mDatabase.getAllCostData();
+        if (cursor != null){
+            while (cursor.moveToNext()){
+                CostBean costBean = new CostBean();
+                costBean.costCategory = cursor.getString(cursor.getColumnIndex("cost_category"));
+                costBean.costDate = cursor.getString(cursor.getColumnIndex("cost_date"));
+                costBean.costMoney = cursor.getString(cursor.getColumnIndex("cost_money"));
+                costBean.costType = cursor.getString(cursor.getColumnIndex("cost_type"));
+                costBean.costRemark = cursor.getString(cursor.getColumnIndex("cost_remark"));
+                mCostBeanList.add(costBean);
+            }
+            cursor.close();
+        }
     }
 
     /**
@@ -216,7 +245,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
                 showDeleteDialog(position);
-//                mAdapter.notifyDataSetChanged();
                 return true;
             }
         });
@@ -232,6 +260,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 mDatabase.deleteOneData(Integer.parseInt(mIdList.get(position)));
+                Intent intent = new Intent("com.zsf.accountbook.MY_BROADCAST");
+                sendBroadcast(intent);
             }
         });
         builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
