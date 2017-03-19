@@ -23,7 +23,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="来记账"
+            android:text="@string/app_name"
             android:textColor="@color/white"
             android:textSize="25sp"
             android:textStyle="bold" />
@@ -31,7 +31,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="1.0版本"
+            android:text="@string/version_value"
             android:textColor="@color/red"
             android:textSize="16sp" />
     </LinearLayout>
@@ -48,14 +48,14 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="联系我"
+            android:text="@string/contact"
             android:textSize="20sp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:text="QQ:852333743"
+            android:text="@string/qq"
             android:textSize="20sp" />
     </RelativeLayout>
 

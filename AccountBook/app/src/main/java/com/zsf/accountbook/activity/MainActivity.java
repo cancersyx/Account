@@ -5,8 +5,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -32,6 +30,18 @@ import java.util.List;
 import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
+
+    public static final String COST_CATEGORY = "cost_category";
+    public static final String COST_DATE = "cost_date";
+    public static final String COST_MONEY = "cost_money";
+    public static final String COST_TYPE = "cost_type";
+    public static final String COST_REMARK = "cost_remark";
+    public static final String ID = "id";
+    public static final String MONEY = "money";
+    public static final String CATEGORY = "category";
+    public static final String TYPE = "type";
+    public static final String REMARK = "remark";
+    public static final String COST_LIST = "cost_list";
 
     private FlexibleListView mCostListView;
     private List<CostBean> mCostBeanList;
@@ -66,16 +76,6 @@ public class MainActivity extends AppCompatActivity {
 
     private List<String> mIdList = new ArrayList<>();
 
-    private Handler handler = new Handler(){
-        @Override
-        public void handleMessage(Message msg) {
-            switch (msg.what){
-                case 0:
-
-
-            }
-        }
-    };
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -108,22 +108,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    private void getDataFromSQL(){
-        Cursor cursor = mDatabase.getAllCostData();
-        if (cursor != null){
-            while (cursor.moveToNext()){
-                CostBean costBean = new CostBean();
-                costBean.costCategory = cursor.getString(cursor.getColumnIndex("cost_category"));
-                costBean.costDate = cursor.getString(cursor.getColumnIndex("cost_date"));
-                costBean.costMoney = cursor.getString(cursor.getColumnIndex("cost_money"));
-                costBean.costType = cursor.getString(cursor.getColumnIndex("cost_type"));
-                costBean.costRemark = cursor.getString(cursor.getColumnIndex("cost_remark"));
-                mCostBeanList.add(costBean);
-            }
-            cursor.close();
-        }
-    }
-
     /**
      *
      */
@@ -133,11 +117,11 @@ public class MainActivity extends AppCompatActivity {
             mIdList.removeAll(mIdList);
             while (cursor.moveToNext()) {
                 CostBean costBean = new CostBean();
-                costBean.costCategory = cursor.getString(cursor.getColumnIndex("cost_category"));
-                costBean.costDate = cursor.getString(cursor.getColumnIndex("cost_date"));
-                costBean.costMoney = cursor.getString(cursor.getColumnIndex("cost_money"));
-                costBean.costType = cursor.getString(cursor.getColumnIndex("cost_type"));
-                costBean.costRemark = cursor.getString(cursor.getColumnIndex("cost_remark"));
+                costBean.costCategory = cursor.getString(cursor.getColumnIndex(COST_CATEGORY));
+                costBean.costDate = cursor.getString(cursor.getColumnIndex(COST_DATE));
+                costBean.costMoney = cursor.getString(cursor.getColumnIndex(COST_MONEY));
+                costBean.costType = cursor.getString(cursor.getColumnIndex(COST_TYPE));
+                costBean.costRemark = cursor.getString(cursor.getColumnIndex(COST_REMARK));
                 mCostBeanList.add(costBean);
                 mIdList.add(cursor.getString(0));
             }
@@ -159,9 +143,9 @@ public class MainActivity extends AppCompatActivity {
             mBalance = mIncomeSum - mExpendSum;
             float temp = mBalance / mIncomeSum;
             mArcPercentView.setSweepValue(temp);
-            mBalanceTxt.setText("余额：\n" + Float.toString(mBalance) + "元");
+            mBalanceTxt.setText(getString(R.string.balance) + Float.toString(mBalance) + getString(R.string.yuan));
         } else {
-            mBalanceTxt.setText("余额：\n" + Float.toString(mBalance) + "元");
+            mBalanceTxt.setText(getString(R.string.balance) + Float.toString(mBalance) + getString(R.string.yuan));
         }
     }
 
@@ -186,24 +170,24 @@ public class MainActivity extends AppCompatActivity {
         }
 
         for (int i = 0; i < allData.size(); i++) {
-            if (!(table.get("早午晚餐") == null))
-                mMealsTotalMoney = table.get("早午晚餐");
-            if (!(table.get("购物") == null))
-                mShoppingTotalMoney = table.get("购物");
-            if (!(table.get("话费") == null))
-                mPhoneCharge = table.get("话费");
-            if (!(table.get("油费") == null))
-                mOilCharge = table.get("油费");
-            if (!(table.get("其他") == null))
-                mOtherMoney = table.get("其他");
-            if (!(table.get("工资") == null))
-                mSalaryTotalMoney = table.get("工资");
-            if (!(table.get("兼职") == null))
-                mPartTimeJobTotalMoney = table.get("兼职");
-            if (!(table.get("奖金") == null))
-                mBonus = table.get("奖金");
-            if (!(table.get("利息") == null))
-                mInterest = table.get("利息");
+            if (!(table.get(getString(R.string.meals)) == null))
+                mMealsTotalMoney = table.get(getString(R.string.meals));
+            if (!(table.get(getString(R.string.shopping)) == null))
+                mShoppingTotalMoney = table.get(getString(R.string.shopping));
+            if (!(table.get(getString(R.string.phone_charge)) == null))
+                mPhoneCharge = table.get(getString(R.string.phone_charge));
+            if (!(table.get(getString(R.string.oil_charge)) == null))
+                mOilCharge = table.get(getString(R.string.oil_charge));
+            if (!(table.get(getString(R.string.other)) == null))
+                mOtherMoney = table.get(getString(R.string.other));
+            if (!(table.get(getString(R.string.salary)) == null))
+                mSalaryTotalMoney = table.get(getString(R.string.salary));
+            if (!(table.get(getString(R.string.part_time_job)) == null))
+                mPartTimeJobTotalMoney = table.get(getString(R.string.part_time_job));
+            if (!(table.get(getString(R.string.bonus)) == null))
+                mBonus = table.get(getString(R.string.bonus));
+            if (!(table.get(getString(R.string.interest)) == null))
+                mInterest = table.get(getString(R.string.interest));
         }
     }
 
@@ -218,21 +202,22 @@ public class MainActivity extends AppCompatActivity {
         mCostListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                position = position + 1;
                 Cursor localCursor = mDatabase.getAllCostData();
                 if (localCursor != null && localCursor.moveToFirst()) {
                     do {
-                        if (localCursor.getString(
-                                localCursor.getColumnIndex("cost_type")).equals("支出") && (position
-                                == localCursor.getInt(localCursor.getColumnIndex("id")))) {
-                            mStr = "支出";
-                            mRemarkStr = localCursor.getString(localCursor.getColumnIndex("cost_remark"));
+                        if (localCursor.getString(localCursor.getColumnIndex(COST_TYPE))
+                                .equals(getString(R.string.expend)) && (Integer.parseInt(
+                                mIdList.get(position))
+                                == localCursor.getInt(localCursor.getColumnIndex(ID)))) {
+                            mStr = getString(R.string.expend);
+                            mRemarkStr = localCursor.getString(localCursor.getColumnIndex(COST_REMARK));
                             skipToDetails(view);
                         } else if (localCursor.getString(
-                                localCursor.getColumnIndex("cost_type")).equals("收入") && (position
-                                == localCursor.getInt(localCursor.getColumnIndex("id")))) {
-                            mStr = "收入";
-                            mRemarkStr = localCursor.getString(localCursor.getColumnIndex("cost_remark"));
+                                localCursor.getColumnIndex(COST_TYPE)).equals(getString(R.string.income))
+                                && (Integer.parseInt(mIdList.get(position))
+                                == localCursor.getInt(localCursor.getColumnIndex(ID)))) {
+                            mStr = getString(R.string.income);
+                            mRemarkStr = localCursor.getString(localCursor.getColumnIndex(COST_REMARK));
                             skipToDetails(view);
                         }
                     } while (localCursor.moveToNext());
@@ -253,18 +238,19 @@ public class MainActivity extends AppCompatActivity {
 
     private void showDeleteDialog(final int position) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("提示");
+        builder.setTitle(R.string.hint);
         builder.setIcon(R.drawable.warning);
-        builder.setMessage("您确定要删除该条账单吗？");
-        builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+        builder.setMessage(R.string.delete_message);
+        builder.setPositiveButton(R.string.sure, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 mDatabase.deleteOneData(Integer.parseInt(mIdList.get(position)));
                 Intent intent = new Intent("com.zsf.accountbook.MY_BROADCAST");
                 sendBroadcast(intent);
+//                mCostListView.invalidate();
             }
         });
-        builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+        builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
@@ -284,10 +270,10 @@ public class MainActivity extends AppCompatActivity {
         String moneyStr = moneyTxt.getText().toString();
         String categoryStr = categoryTxt.getText().toString();
         Intent intent = new Intent(MainActivity.this, MarkAccountActivity.class);
-        intent.putExtra("money", moneyStr);
-        intent.putExtra("category", categoryStr);
-        intent.putExtra("type", mStr);
-        intent.putExtra("remark", mRemarkStr);
+        intent.putExtra(MONEY, moneyStr);
+        intent.putExtra(CATEGORY, categoryStr);
+        intent.putExtra(TYPE, mStr);
+        intent.putExtra(REMARK, mRemarkStr);
         startActivity(intent);
     }
 
@@ -302,7 +288,7 @@ public class MainActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.action_chart:
                 Intent intent = new Intent(MainActivity.this, ChartActivity.class);
-                intent.putExtra("cost_list", (Serializable) mCostBeanList);
+                intent.putExtra(COST_LIST, (Serializable) mCostBeanList);
                 startActivity(intent);
                 overridePendingTransition(R.anim.operate_in,R.anim.operate_out);
                 break;
@@ -328,7 +314,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         if ((System.currentTimeMillis() - exitTime) > 2000) {
-            Toast.makeText(getApplicationContext(), "再按一次退出程序", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), R.string.exit_message, Toast.LENGTH_SHORT).show();
             exitTime = System.currentTimeMillis();
             return;
         } else {
@@ -337,4 +323,10 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+
+    }
 }

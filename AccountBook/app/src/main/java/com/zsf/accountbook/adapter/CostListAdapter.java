@@ -34,17 +34,14 @@ public class CostListAdapter extends BaseAdapter {
         context.registerReceiver(new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
-                list.clear();
+                mList.clear();
                 mList = list;
                 notifyDataSetChanged();
             }
         },intentFilter);
     }
 
-    public void refreshData(List<CostBean> list){
-        mList = list;
-        notifyDataSetChanged();
-    }
+
     @Override
     public int getCount() {
         return mList.size();

@@ -39,7 +39,7 @@ public class ChartActivity extends Activity {
     private void initView() {
         mBack = (ImageView) findViewById(R.id.iv_back);
         mTitle = (TextView) findViewById(R.id.tv_title);
-        mTitle.setText("统计");
+        mTitle.setText(R.string.statistics);
         mExpendChartBtn = (Button) findViewById(R.id.btn_expend);
         mIncomeChartBtn = (Button) findViewById(R.id.btn_income);
         mContainer = (FrameLayout) findViewById(R.id.fl_container);

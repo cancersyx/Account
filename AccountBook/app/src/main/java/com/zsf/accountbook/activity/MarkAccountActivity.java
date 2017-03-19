@@ -21,6 +21,7 @@ import com.zsf.accountbook.fragment.IncomeFragment;
 
 public class MarkAccountActivity extends Activity implements View.OnClickListener {
 
+    public static final String TYPE = "type";
     private Button incomeBtn;
     private Button mExpendButton;
     private LinearLayout linearLayout;
@@ -64,12 +65,12 @@ public class MarkAccountActivity extends Activity implements View.OnClickListene
         });
     }
     private void getData() {
-        if ((getIntent() != null) && (getIntent().getStringExtra("type") != null)
-                && (getIntent().getStringExtra("type").equals("支出"))){
+        if ((getIntent() != null) && (getIntent().getStringExtra(TYPE) != null)
+                && (getIntent().getStringExtra(TYPE).equals(getString(R.string.expend)))){
             initExpendFragment();
 
-        }else if ((getIntent() != null) && (getIntent().getStringExtra("type") != null)
-                && (getIntent().getStringExtra("type").equals("收入"))){
+        }else if ((getIntent() != null) && (getIntent().getStringExtra(TYPE) != null)
+                && (getIntent().getStringExtra(TYPE).equals(getString(R.string.income)))){
             initIncomeFragment();
             mExpendButton.setBackground(getResources().getDrawable(R.drawable.button_normal_bg));
         }

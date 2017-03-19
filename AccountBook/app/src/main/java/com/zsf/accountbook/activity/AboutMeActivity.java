@@ -27,7 +27,7 @@ public class AboutMeActivity extends Activity {
     private void initView() {
         mBack = (ImageView) findViewById(R.id.iv_back);
         mTitle = (TextView) findViewById(R.id.tv_title);
-        mTitle.setText("关于我");
+        mTitle.setText(R.string.about_me);
     }
 
     private void initEvent() {

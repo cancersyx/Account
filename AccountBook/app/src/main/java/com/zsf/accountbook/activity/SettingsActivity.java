@@ -30,7 +30,7 @@ public class SettingsActivity extends Activity {
     private void initView() {
         mBack = (ImageView) findViewById(R.id.iv_back);
         mTitle = (TextView) findViewById(R.id.tv_title);
-        mTitle.setText("设置");
+        mTitle.setText(R.string.setting);
         mChangeThemeColor = (TextView) findViewById(R.id.tv_change_theme_color);
 
     }

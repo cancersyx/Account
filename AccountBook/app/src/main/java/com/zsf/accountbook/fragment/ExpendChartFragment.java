@@ -2,17 +2,11 @@ package com.zsf.accountbook.fragment;
 
 import android.app.Fragment;
 import android.graphics.Color;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.text.SpannableString;
-import android.text.style.ForegroundColorSpan;
-import android.text.style.RelativeSizeSpan;
-import android.text.style.StyleSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.data.Entry;
@@ -125,36 +119,36 @@ public class ExpendChartFragment extends Fragment implements OnChartValueSelecte
         ArrayList<PieEntry> entries = new ArrayList<PieEntry>();
 
         for (int i = 0; i < allData.size(); i++) {
-            if (!(table.get("早午晚餐") == null))
-                mealsTotalMoney = table.get("早午晚餐");
-            if (!(table.get("购物") == null))
-                shoppingTotalMoney = table.get("购物");
-            if (!(table.get("话费") == null))
-                phoneCharge = table.get("话费");
-            if (!(table.get("油费") == null))
-                oilCharge = table.get("油费");
-            if (!(table.get("其他") == null))
-                otherMoney = table.get("其他");
+            if (!(table.get(getString(R.string.meals)) == null))
+                mealsTotalMoney = table.get(getString(R.string.meals));
+            if (!(table.get(getString(R.string.shopping)) == null))
+                shoppingTotalMoney = table.get(getString(R.string.shopping));
+            if (!(table.get(getString(R.string.phone_charge)) == null))
+                phoneCharge = table.get(getString(R.string.phone_charge));
+            if (!(table.get(getString(R.string.oil_charge)) == null))
+                oilCharge = table.get(getString(R.string.oil_charge));
+            if (!(table.get(getString(R.string.other)) == null))
+                otherMoney = table.get(getString(R.string.other));
 
         }
 
         if (!(mealsTotalMoney == 0))
-            entries.add(new PieEntry(mealsTotalMoney,"早午晚餐"));
+            entries.add(new PieEntry(mealsTotalMoney,getString(R.string.meals)));
         if (!(shoppingTotalMoney == 0))
-            entries.add(new PieEntry(shoppingTotalMoney,"购物"));
+            entries.add(new PieEntry(shoppingTotalMoney,getString(R.string.shopping)));
         if (!(phoneCharge == 0))
-            entries.add(new PieEntry(phoneCharge,"话费"));
+            entries.add(new PieEntry(phoneCharge,getString(R.string.phone_charge)));
         if (!(oilCharge == 0))
-            entries.add(new PieEntry(oilCharge,"油费"));
+            entries.add(new PieEntry(oilCharge,getString(R.string.oil_charge)));
         if (!(otherMoney == 0))
-            entries.add(new PieEntry(otherMoney,"其他"));
+            entries.add(new PieEntry(otherMoney,getString(R.string.other)));
 
 
 
         // NOTE: The order of the entries when being added to the entries array determines their position around the center of
         // the chart.
 
-        PieDataSet dataSet = new PieDataSet(entries, "选取的结果");
+        PieDataSet dataSet = new PieDataSet(entries, getString(R.string.choose_result));
         dataSet.setSliceSpace(3f);//片之间的距离
         dataSet.setSelectionShift(5f);
 
@@ -187,7 +181,7 @@ public class ExpendChartFragment extends Fragment implements OnChartValueSelecte
 
         mPieChart.invalidate();
 
-        mPieChart.setCenterText("总计=" + showHoleCenterText() + "元");//设置中间文字内容
+        mPieChart.setCenterText(getString(R.string.total) + showHoleCenterText() + getString(R.string.yuan));//设置中间文字内容
 
     }
 
@@ -218,38 +212,10 @@ public class ExpendChartFragment extends Fragment implements OnChartValueSelecte
         return Float.toString(sum);
     }
 
-    private SpannableString generateCenterSpannableText() {
-        SpannableString s = new SpannableString("MPAndroidChart\ndeveloped by Philipp Jahoda");
-        s.setSpan(new RelativeSizeSpan(1.7f), 0, 14, 0);
-        s.setSpan(new StyleSpan(Typeface.NORMAL), 14, s.length() - 15, 0);
-        s.setSpan(new ForegroundColorSpan(Color.GRAY), 14, s.length() - 15, 0);
-        s.setSpan(new RelativeSizeSpan(.8f), 14, s.length() - 15, 0);
-        s.setSpan(new StyleSpan(Typeface.ITALIC), s.length() - 14, s.length(), 0);
-        s.setSpan(new ForegroundColorSpan(ColorTemplate.getHoloBlue()), s.length() - 14, s.length(), 0);
-        return s;
-    }
-
     @Override
     public void onValueSelected(Entry e, Highlight h) {
         if (e == null)
             return;
-        Toast.makeText(getActivity(),"点击了",Toast.LENGTH_SHORT).show();
-//        new AlertDialog.Builder(getActivity())
-//                .setTitle("详情")
-//                .setMessage(e.describeContents())
-//                .setPositiveButton("确定", new DialogInterface.OnClickListener() {
-//                    @Override
-//                    public void onClick(DialogInterface dialog, int which) {
-//                        dialog.dismiss();
-//                    }
-//                })
-//                .setPositiveButton("取消", new DialogInterface.OnClickListener() {
-//                    @Override
-//                    public void onClick(DialogInterface dialog, int which) {
-//
-//                    }
-//                })
-//                .create().show();
 
     }
 

@@ -18,7 +18,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="收入统计"
+            android:text="@string/income_statistics"
             android:layout_marginRight="5dp"
             android:textSize="20sp"
             android:background="@drawable/button_normal_bg"/>
@@ -34,7 +34,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:layout_marginLeft="5dp"
-            android:text="支出统计"
+            android:text="@string/expend_statistics"
             android:textSize="20sp"
             android:background="@drawable/button_normal_bg"/>
     </LinearLayout>

@@ -15,7 +15,7 @@
             android:id="@+id/tv_expend"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="金额："
+            android:text="@string/money_colon"
             android:textSize="20sp" />
 
         <EditText
@@ -40,7 +40,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="时间："
+            android:text="@string/time_colon"
             android:textSize="20sp" />
 
         <TextView
@@ -65,7 +65,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="类别："
+            android:text="@string/category_colon"
             android:textSize="20sp" />
 
         <TextView
@@ -74,7 +74,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/spinner_bg"
             android:gravity="center_vertical"
-            android:hint="早午晚餐"
+            android:hint="@string/meals"
             android:paddingLeft="5dp"
             android:textSize="20sp"
             android:textStyle="bold" />
@@ -87,7 +87,7 @@
         android:layout_margin="10dp"
         android:background="@drawable/stroke_blue"
         android:gravity="left"
-        android:hint="备注"
+        android:hint="@string/remark"
         android:padding="5dp"
         android:textColorHint="@color/gray"
         android:textSize="20sp" />
@@ -99,6 +99,6 @@
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:background="@drawable/stroke_blue"
-        android:text="确认" />
+        android:text="@string/sure" />
 
 </LinearLayout>

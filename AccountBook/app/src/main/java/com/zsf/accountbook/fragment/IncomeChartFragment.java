@@ -2,13 +2,8 @@ package com.zsf.accountbook.fragment;
 
 import android.app.Fragment;
 import android.graphics.Color;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.text.SpannableString;
-import android.text.style.ForegroundColorSpan;
-import android.text.style.RelativeSizeSpan;
-import android.text.style.StyleSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,22 +36,22 @@ public class IncomeChartFragment extends Fragment implements OnChartValueSelecte
     private PieChart mPieChart;
     private View view;
 
-    private Map<String,Integer> table = new TreeMap<>();
+    private Map<String, Integer> table = new TreeMap<>();
     private List<CostBean> allData;
     private List<Object> mKeys = new ArrayList<>();
     private Object key;
 
     private float mSalaryTotalMoney = 0.0f;
-    private float mPartTimeJobTotalMoney =0.0f;
+    private float mPartTimeJobTotalMoney = 0.0f;
     private float mBonus = 0.0f;
-//    private float mOtherMoney = 0.0f;
+    //    private float mOtherMoney = 0.0f;
     private float mInterest = 0.0f;//利息收入
-    
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.income_fragment_chart,container,false);
-        
+        view = inflater.inflate(R.layout.income_fragment_chart, container, false);
+
         initView();
         initEvent();
 
@@ -64,7 +59,7 @@ public class IncomeChartFragment extends Fragment implements OnChartValueSelecte
         generateValues(allData);
 
         getCategoryNumber();
-        
+
         setData();
         return view;
     }
@@ -104,9 +99,9 @@ public class IncomeChartFragment extends Fragment implements OnChartValueSelecte
      */
     private void getCategoryNumber() {
         Set entries = table.entrySet();
-        if (entries != null){
+        if (entries != null) {
             Iterator iterator = entries.iterator();
-            while (iterator.hasNext()){
+            while (iterator.hasNext()) {
                 Map.Entry entry = (Map.Entry) iterator.next();
                 key = entry.getKey();
                 mKeys.add(key);
@@ -114,32 +109,32 @@ public class IncomeChartFragment extends Fragment implements OnChartValueSelecte
         }
     }
 
-    private void setData(){
+    private void setData() {
         ArrayList<PieEntry> entries = new ArrayList<PieEntry>();
 
         // NOTE: The order of the entries when being added to the entries array determines their position around the center of
         // the chart.
         for (int i = 0; i < allData.size(); i++) {
-            if (!(table.get("工资") == null))
-                mSalaryTotalMoney = table.get("工资");
-            if (!(table.get("兼职") == null))
-                mPartTimeJobTotalMoney = table.get("兼职");
-            if (!(table.get("奖金") == null))
-                mBonus = table.get("奖金");
-            if (!(table.get("利息") == null))
-                mInterest = table.get("利息");
+            if (!(table.get(getString(R.string.salary)) == null))
+                mSalaryTotalMoney = table.get(getString(R.string.salary));
+            if (!(table.get(getString(R.string.part_time_job)) == null))
+                mPartTimeJobTotalMoney = table.get(getString(R.string.part_time_job));
+            if (!(table.get(getString(R.string.bonus)) == null))
+                mBonus = table.get(getString(R.string.bonus));
+            if (!(table.get(getString(R.string.interest)) == null))
+                mInterest = table.get(getString(R.string.interest));
         }
 
         if (!(mSalaryTotalMoney == 0))
-            entries.add(new PieEntry(mSalaryTotalMoney,"工资"));
+            entries.add(new PieEntry(mSalaryTotalMoney, getString(R.string.salary)));
         if (!(mPartTimeJobTotalMoney == 0))
-            entries.add(new PieEntry(mPartTimeJobTotalMoney,"兼职"));
+            entries.add(new PieEntry(mPartTimeJobTotalMoney, getString(R.string.part_time_job)));
         if (!(mBonus == 0))
-            entries.add(new PieEntry(mBonus,"奖金"));
+            entries.add(new PieEntry(mBonus, getString(R.string.bonus)));
         if (!(mInterest == 0))
-            entries.add(new PieEntry(mInterest,"利息"));
+            entries.add(new PieEntry(mInterest, getString(R.string.interest)));
 
-        PieDataSet dataSet = new PieDataSet(entries, "选取的结果");
+        PieDataSet dataSet = new PieDataSet(entries, getString(R.string.choose_result));
         dataSet.setSliceSpace(3f);//片之间的距离
         dataSet.setSelectionShift(5f);
 
@@ -177,26 +172,28 @@ public class IncomeChartFragment extends Fragment implements OnChartValueSelecte
 
         mPieChart.invalidate();
 
-        mPieChart.setCenterText("总计=" + showHoleCenterText());//设置中间文字内容
+        mPieChart.setCenterText(getString(R.string.total) +
+                showHoleCenterText() + getString(R.string.yuan));//设置中间文字内容
 
     }
 
     /**
      * 处理数据
      * 将相同项目下的钱相加
+     *
      * @param allData
      */
-    private void generateValues(List<CostBean> allData){
-        if (allData != null){
+    private void generateValues(List<CostBean> allData) {
+        if (allData != null) {
             for (int i = 0; i < allData.size(); i++) {
                 CostBean costBean = allData.get(i);
                 String costCategory = costBean.costCategory;
                 int costMoney = Integer.parseInt(costBean.costMoney);
-                if (!table.containsKey(costCategory)){
-                    table.put(costCategory,costMoney);
-                }else {
+                if (!table.containsKey(costCategory)) {
+                    table.put(costCategory, costMoney);
+                } else {
                     int originMoney = table.get(costCategory);
-                    table.put(costCategory,originMoney + costMoney);
+                    table.put(costCategory, originMoney + costMoney);
                 }
 
 
@@ -206,27 +203,15 @@ public class IncomeChartFragment extends Fragment implements OnChartValueSelecte
     }
 
 
-    private String  showHoleCenterText(){
+    private String showHoleCenterText() {
         float sum = mSalaryTotalMoney + mPartTimeJobTotalMoney + mBonus + mInterest;
         return Float.toString(sum);
-    }
-    private SpannableString generateCenterSpannableText() {
-        float sum = mSalaryTotalMoney + mPartTimeJobTotalMoney + mBonus + mInterest;
-        SpannableString s = new SpannableString("总计=" + Float.toString(sum) + "元");
-        s.setSpan(new RelativeSizeSpan(1.7f), 0, 14, 0);
-        s.setSpan(new StyleSpan(Typeface.NORMAL), 14, s.length() - 15, 0);
-        s.setSpan(new ForegroundColorSpan(Color.GRAY), 14, s.length() - 15, 0);
-        s.setSpan(new RelativeSizeSpan(.8f), 14, s.length() - 15, 0);
-        s.setSpan(new StyleSpan(Typeface.ITALIC), s.length() - 14, s.length(), 0);
-        s.setSpan(new ForegroundColorSpan(ColorTemplate.getHoloBlue()), s.length() - 14, s.length(), 0);
-        return s;
     }
 
     @Override
     public void onValueSelected(Entry e, Highlight h) {
         if (e == null)
             return;
-        Toast.makeText(getActivity(),"点击了",Toast.LENGTH_SHORT).show();
     }
 
     @Override

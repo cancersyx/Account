@@ -1,6 +1,46 @@
 <resources>
     <string name="app_name">来记账</string>
     <string name="action_settings">Settings</string>
+    <string name="about_me">关于我</string>
+    <string name="statistics">统计</string>
+    <string name="balance">余额：\n</string>
+    <string name="yuan">元</string>
+    <string name="meals">早午晚餐</string>
+    <string name="shopping">购物</string>
+    <string name="phone_charge">话费</string>
+    <string name="oil_charge">油费</string>
+    <string name="other">其他</string>
+    <string name="salary">工资</string>
+    <string name="part_time_job">兼职</string>
+    <string name="bonus">奖金</string>
+    <string name="interest">利息</string>
+    <string name="expend">支出</string>
+    <string name="income">收入</string>
+    <string name="hint">提示</string>
+    <string name="delete_message">您确定要删除该条账单吗？</string>
+    <string name="sure">确定</string>
+    <string name="cancel">取消</string>
+    <string name="exit_message">再按一次退出程序</string>
+    <string name="setting">设置</string>
+    <string name="choose_result">选取的结果</string>
+    <string name="total">"总计 = "</string>
+    <string name="choose_item">选择项目</string>
+    <string name="version_value">1.0.0版本</string>
+    <string name="contact">联系我</string>
+    <string name="qq">QQ:852333743</string>
+    <string name="income_statistics">收入统计</string>
+    <string name="expend_statistics">支出统计</string>
+    <string name="details">详情</string>
+    <string name="money">金额</string>
+    <string name="money_colon">金额：</string>
+    <string name="time_colon">时间：</string>
+    <string name="category_colon">类别：</string>
+    <string name="remark">备注</string>
+    <string name="click_enter">点击进入</string>
+    <string name="all_income">所有收入：</string>
+    <string name="all_expend">所有支出：</string>
+    <string name="input_account_title">请输入账本标题</string>
+    <string name="input_money">请输入金额</string>
 
 
 </resources>

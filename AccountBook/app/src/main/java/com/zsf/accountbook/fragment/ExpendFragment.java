@@ -14,7 +14,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.zsf.accountbook.R;
 import com.zsf.accountbook.activity.MainActivity;
@@ -31,6 +30,10 @@ import java.util.List;
  */
 
 public class ExpendFragment extends Fragment {
+    public static final String MONEY = "money";
+    public static final String CATEGORY = "category";
+    public static final String REMARK = "remark";
+    public static final String TIME_PICKER = "timePicker";
     private View view;
     private TextView mTime;
     private Button mOkBtn;
@@ -86,7 +89,6 @@ public class ExpendFragment extends Fragment {
         mTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getActivity(), "点击了时间", Toast.LENGTH_SHORT).show();
                 showTimeDialog();
             }
         });
@@ -125,7 +127,7 @@ public class ExpendFragment extends Fragment {
                 //设置对话框图标
                 .setIcon(R.drawable.warning)
                 //设置对话标题
-                .setTitle("选择项目")
+                .setTitle(R.string.choose_item)
                 //设置对话框显示的view
                 .setItems(arrs, new DialogInterface.OnClickListener() {
                     @Override
@@ -141,14 +143,14 @@ public class ExpendFragment extends Fragment {
 
     private void getData() {
         Intent intent = getActivity().getIntent();
-        mInputMoney.setText(intent.getStringExtra("money"));
-        mCategoryTxt.setText(intent.getStringExtra("category"));
-        mRemarkEdt.setText(intent.getStringExtra("remark"));
+        mInputMoney.setText(intent.getStringExtra(MONEY));
+        mCategoryTxt.setText(intent.getStringExtra(CATEGORY));
+        mRemarkEdt.setText(intent.getStringExtra(REMARK));
     }
 
     private void showTimeDialog() {
         DialogFragment newFragment = new TimePickerFragment();
-        newFragment.show(getFragmentManager(), "timePicker");
+        newFragment.show(getFragmentManager(), TIME_PICKER);
 
 
     }

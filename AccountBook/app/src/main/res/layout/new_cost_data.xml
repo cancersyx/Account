@@ -8,7 +8,7 @@
         android:id="@+id/et_cost_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="请输入账本标题"
+        android:hint="@string/input_account_title"
         android:textSize="20sp" />
 
 
@@ -16,7 +16,7 @@
         android:id="@+id/et_cost_money"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="请输入金额"
+        android:hint="@string/input_money"
         android:textSize="20sp" />
 
 
