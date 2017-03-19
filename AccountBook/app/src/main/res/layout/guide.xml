@@ -13,17 +13,17 @@
 
     </FrameLayout>
 
-    <Button
-        android:id="@+id/btn_enter"
-        android:layout_width="200dp"
-        android:layout_height="50dp"
-        android:textSize="20sp"
-        android:textColor="@android:color/white"
-        android:background="#B6292D"
-        android:layout_marginTop="410dp"
-        android:layout_centerHorizontal="true"
-        android:visibility="gone"
-        />
+    <!--<Button-->
+        <!--android:id="@+id/btn_enter"-->
+        <!--android:layout_width="200dp"-->
+        <!--android:layout_height="50dp"-->
+        <!--android:textSize="20sp"-->
+        <!--android:textColor="@color/white"-->
+        <!--android:background="@drawable/stroke_blue"-->
+        <!--android:layout_marginTop="400dp"-->
+        <!--android:layout_centerHorizontal="true"-->
+        <!--android:visibility="gone"-->
+        <!--/>-->
 
     <LinearLayout
         android:id="@+id/ll"
@@ -58,13 +58,6 @@
             android:padding="10.0dip"
             android:src="@drawable/dot_selector" />
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:clickable="true"
-            android:padding="10.0dip"
-            android:src="@drawable/dot_selector" />
     </LinearLayout>
 
 </RelativeLayout>

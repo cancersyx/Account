@@ -26,6 +26,7 @@ public class CostListAdapter extends BaseAdapter {
         mList = list;
         mInflater = LayoutInflater.from(context);
     }
+
     @Override
     public int getCount() {
         return mList.size();

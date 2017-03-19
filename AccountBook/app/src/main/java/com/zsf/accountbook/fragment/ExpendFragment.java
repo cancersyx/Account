@@ -102,7 +102,6 @@ public class ExpendFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 CostBean costBean = new CostBean();
-//                costBean.costCategory = (String) mCategory.getSelectedItem();
                 if (mCategoryTxt.getText().equals("")){
                     costBean.costCategory = mCategoryTxt.getHint().toString();
                 }else {

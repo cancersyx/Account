@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -135,8 +134,6 @@ public class MainActivity extends AppCompatActivity {
         } else {
             mBalanceTxt.setText("余额：\n" + Float.toString(mBalance) + "元");
         }
-
-
     }
 
     /**
@@ -219,10 +216,12 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
                 showDeleteDialog(position);
+//                mAdapter.notifyDataSetChanged();
                 return true;
             }
         });
     }
+
 
     private void showDeleteDialog(final int position) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -233,7 +232,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 mDatabase.deleteOneData(Integer.parseInt(mIdList.get(position)));
-                Log.d("zsf","输出List中的第一个数" + mIdList.get(0));
             }
         });
         builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
@@ -278,15 +276,15 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
                 overridePendingTransition(R.anim.operate_in,R.anim.operate_out);
                 break;
-            case R.id.settings:
-                startActivity(new Intent(this, SettingsActivity.class));
-                overridePendingTransition(R.anim.operate_in,R.anim.operate_out);
-                break;
-            case R.id.more:
-                //TODO 增加更多功能的模块
-                startActivity(new Intent(this, MoreActivity.class));
-                overridePendingTransition(R.anim.operate_in,R.anim.operate_out);
-                break;
+//            case R.id.settings:
+//                startActivity(new Intent(this, SettingsActivity.class));
+//                overridePendingTransition(R.anim.operate_in,R.anim.operate_out);
+//                break;
+//            case R.id.more:
+//                //TODO 增加更多功能的模块
+//                startActivity(new Intent(this, MoreActivity.class));
+//                overridePendingTransition(R.anim.operate_in,R.anim.operate_out);
+//                break;
             case R.id.about_me:
                 startActivity(new Intent(MainActivity.this, AboutMeActivity.class));
                 overridePendingTransition(R.anim.operate_in,R.anim.operate_out);
@@ -309,16 +307,4 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        mCostListView.setAdapter(mAdapter);
-        mAdapter.notifyDataSetChanged();
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-
-    }
 }

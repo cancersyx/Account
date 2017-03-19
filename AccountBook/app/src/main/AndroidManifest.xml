@@ -31,7 +31,8 @@
         <activity android:name=".activity.MainActivity"
             android:theme="@style/AppTheme.NoActionBar"/>
         <activity android:name=".activity.WelcomeGuideActivity"/>
-        <activity android:name=".activity.MarkAccountActivity"/>
+        <activity android:name=".activity.MarkAccountActivity"
+            android:finishOnTaskLaunch="true"/>
         <activity android:name=".activity.AboutMeActivity"/>
         <activity android:name=".activity.SettingsActivity"/>
         <activity android:name=".activity.MoreActivity"/>
