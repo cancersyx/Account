@@ -1,9 +1,6 @@
 package com.zsf.accountbook.adapter;
 
-import android.content.BroadcastReceiver;
 import android.content.Context;
-import android.content.Intent;
-import android.content.IntentFilter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,16 +26,6 @@ public class CostListAdapter extends BaseAdapter {
         mList = list;
         mInflater = LayoutInflater.from(context);
 
-        IntentFilter intentFilter = new IntentFilter();
-        intentFilter.addAction("com.zsf.accountbook.MY_BROADCAST");
-        context.registerReceiver(new BroadcastReceiver() {
-            @Override
-            public void onReceive(Context context, Intent intent) {
-                mList.clear();
-                mList = list;
-                notifyDataSetChanged();
-            }
-        },intentFilter);
     }
 
 

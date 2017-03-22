@@ -245,9 +245,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 mDatabase.deleteOneData(Integer.parseInt(mIdList.get(position)));
-                Intent intent = new Intent("com.zsf.accountbook.MY_BROADCAST");
-                sendBroadcast(intent);
-//                mCostListView.invalidate();
+                mCostBeanList.remove(position);
+                mCostListView.setAdapter(mAdapter);
             }
         });
         builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
@@ -290,9 +289,10 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(MainActivity.this, ChartActivity.class);
                 intent.putExtra(COST_LIST, (Serializable) mCostBeanList);
                 startActivity(intent);
-                overridePendingTransition(R.anim.operate_in,R.anim.operate_out);
+                overridePendingTransition(R.anim.operate_in, R.anim.operate_out);
                 break;
 //            case R.id.settings:
+//                  TODO 增加设计模块
 //                startActivity(new Intent(this, SettingsActivity.class));
 //                overridePendingTransition(R.anim.operate_in,R.anim.operate_out);
 //                break;
@@ -303,7 +303,7 @@ public class MainActivity extends AppCompatActivity {
 //                break;
             case R.id.about_me:
                 startActivity(new Intent(MainActivity.this, AboutMeActivity.class));
-                overridePendingTransition(R.anim.operate_in,R.anim.operate_out);
+                overridePendingTransition(R.anim.operate_in, R.anim.operate_out);
                 break;
             default:
                 break;
