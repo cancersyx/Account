@@ -135,8 +135,13 @@ public class MainActivity extends AppCompatActivity {
 
         generateAllValues(mCostBeanList);//处理数据
 
+        showAllExpendAndIncome();
+    }
+
+    private void showAllExpendAndIncome() {
         mIncomeSum = mSalaryTotalMoney + mPartTimeJobTotalMoney + mBonus + mInterest;
         mAllIncomeTxt.setText(Float.toString(mIncomeSum));
+
         mExpendSum = mMealsTotalMoney + mShoppingTotalMoney + mPhoneCharge + mOilCharge + mOtherMoney;
         mAllExpendTxt.setText(Float.toString(mExpendSum));
         if (mIncomeSum - mExpendSum >= 0) {
@@ -155,6 +160,7 @@ public class MainActivity extends AppCompatActivity {
      * @param allData
      */
     private void generateAllValues(List<CostBean> allData) {
+        table.clear();
         if (allData != null) {
             for (int i = 0; i < allData.size(); i++) {
                 CostBean costBean = allData.get(i);
@@ -169,25 +175,57 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
-        for (int i = 0; i < allData.size(); i++) {
-            if (!(table.get(getString(R.string.meals)) == null))
-                mMealsTotalMoney = table.get(getString(R.string.meals));
-            if (!(table.get(getString(R.string.shopping)) == null))
-                mShoppingTotalMoney = table.get(getString(R.string.shopping));
-            if (!(table.get(getString(R.string.phone_charge)) == null))
-                mPhoneCharge = table.get(getString(R.string.phone_charge));
-            if (!(table.get(getString(R.string.oil_charge)) == null))
-                mOilCharge = table.get(getString(R.string.oil_charge));
-            if (!(table.get(getString(R.string.other)) == null))
-                mOtherMoney = table.get(getString(R.string.other));
-            if (!(table.get(getString(R.string.salary)) == null))
-                mSalaryTotalMoney = table.get(getString(R.string.salary));
-            if (!(table.get(getString(R.string.part_time_job)) == null))
-                mPartTimeJobTotalMoney = table.get(getString(R.string.part_time_job));
-            if (!(table.get(getString(R.string.bonus)) == null))
-                mBonus = table.get(getString(R.string.bonus));
-            if (!(table.get(getString(R.string.interest)) == null))
-                mInterest = table.get(getString(R.string.interest));
+        if (!(table.get(getString(R.string.meals)) == null)) {
+            mMealsTotalMoney = table.get(getString(R.string.meals));
+        } else {
+            mMealsTotalMoney = 0.0f;
+        }
+
+        if (!(table.get(getString(R.string.shopping)) == null)) {
+            mShoppingTotalMoney = table.get(getString(R.string.shopping));
+        } else {
+            mShoppingTotalMoney = 0.0f;
+        }
+
+        if (!(table.get(getString(R.string.phone_charge)) == null)) {
+            mPhoneCharge = table.get(getString(R.string.phone_charge));
+        } else {
+            mPhoneCharge = 0.0f;
+        }
+
+        if (!(table.get(getString(R.string.oil_charge)) == null)) {
+            mOilCharge = table.get(getString(R.string.oil_charge));
+        } else {
+            mOilCharge = 0.0f;
+        }
+
+        if (!(table.get(getString(R.string.other)) == null)) {
+            mOtherMoney = table.get(getString(R.string.other));
+        } else {
+            mOtherMoney = 0.0f;
+        }
+
+        if (!(table.get(getString(R.string.salary)) == null)) {
+            mSalaryTotalMoney = table.get(getString(R.string.salary));
+        } else {
+            mSalaryTotalMoney = 0.0f;
+        }
+        if (!(table.get(getString(R.string.part_time_job)) == null)) {
+            mPartTimeJobTotalMoney = table.get(getString(R.string.part_time_job));
+        } else {
+            mPartTimeJobTotalMoney = 0.0f;
+        }
+
+        if (!(table.get(getString(R.string.bonus)) == null)) {
+            mBonus = table.get(getString(R.string.bonus));
+        } else {
+            mBonus = 0.0f;
+        }
+
+        if (!(table.get(getString(R.string.interest)) == null)) {
+            mInterest = table.get(getString(R.string.interest));
+        } else {
+            mInterest = 0.0f;
         }
     }
 
@@ -246,7 +284,10 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(DialogInterface dialog, int which) {
                 mDatabase.deleteOneData(Integer.parseInt(mIdList.get(position)));
                 mCostBeanList.remove(position);
-                mCostListView.setAdapter(mAdapter);
+                mAdapter.notifyDataSetChanged();
+                table.clear();
+                generateAllValues(mCostBeanList);
+                showAllExpendAndIncome();
             }
         });
         builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
@@ -326,7 +367,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-
 
     }
 }
