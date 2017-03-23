@@ -114,4 +114,9 @@ public class MarkAccountActivity extends Activity implements View.OnClickListene
         transaction.commit();
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+    }
 }

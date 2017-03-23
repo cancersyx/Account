@@ -117,6 +117,7 @@ public class ExpendFragment extends Fragment {
                 mCostBeanList.add(costBean);
                 mAdapter.notifyDataSetChanged();
                 startActivity(new Intent(getActivity(), MainActivity.class));
+                finish();
             }
         });
 
@@ -153,6 +154,10 @@ public class ExpendFragment extends Fragment {
         newFragment.show(getFragmentManager(), TIME_PICKER);
 
 
+    }
+
+    private void finish(){
+        getActivity().onBackPressed();
     }
 
 }
