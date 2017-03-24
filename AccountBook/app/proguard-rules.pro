@@ -15,3 +15,23 @@
 #-keepclassmembers class fqcn.of.javascript.interface.for.webview {
 #   public *;
 #}
+
+#压缩级别0-7，Android一般为5(对代码迭代优化的次数)
+-optimizationpasses 5
+
+#不使用大小写混合类名
+-dontusemixedcaseclassnames
+
+ #混淆时记录日志
+-verbose
+
+#保持Activity子类里面的参数类型为View的方法不被混淆，如被XML里面应用的onClick方法
+-keepclassmembers class * extends android.app.Activity {
+   public void *(android.view.View);
+}
+
+#不警告support包中不使用的引用
+-dontwarn android.support.**
+
+#注释不混淆
+-keepattributes *Annotation*

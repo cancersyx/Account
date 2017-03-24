@@ -24,7 +24,6 @@ import com.zsf.accountbook.view.FlexibleListView;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -47,7 +46,6 @@ public class MainActivity extends AppCompatActivity {
     private List<CostBean> mCostBeanList;
     private DatabaseHelper mDatabase;//数据库
     private CostListAdapter mAdapter;
-    private TextView mDateTxt;
     private FloatingActionButton mFab;
     private long exitTime = 0;
     private String mStr = "";
@@ -99,7 +97,6 @@ public class MainActivity extends AppCompatActivity {
         mBalanceTxt = (TextView) findViewById(R.id.tv_balance);
         mArcPercentView = (ArcPercentView) findViewById(R.id.arc_percent_view);
 
-        mDateTxt = (TextView) findViewById(R.id.tv_date);
         mFab = (FloatingActionButton) findViewById(R.id.fab);
         mCostListView = (FlexibleListView) findViewById(R.id.lv_main);
 
@@ -127,11 +124,6 @@ public class MainActivity extends AppCompatActivity {
             }
             cursor.close();
         }
-
-        Calendar c = Calendar.getInstance();
-        int month = c.get(Calendar.MONTH);
-        int day = c.get(Calendar.DAY_OF_MONTH);
-        mDateTxt.setText((month + 1) + "月" + day + "日");//显示日期
 
         generateAllValues(mCostBeanList);//处理数据
 

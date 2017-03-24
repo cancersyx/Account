@@ -33,9 +33,8 @@ public class ExpendFragment extends Fragment {
     public static final String MONEY = "money";
     public static final String CATEGORY = "category";
     public static final String REMARK = "remark";
-    public static final String TIME_PICKER = "timePicker";
     private View view;
-    private TextView mTime;
+    private TextView mDate;
     private Button mOkBtn;
     private TextView mCategoryTxt;
     private DatabaseHelper mDatabase;
@@ -62,7 +61,7 @@ public class ExpendFragment extends Fragment {
 
 
     private void initView() {
-        mTime = (TextView) view.findViewById(R.id.tv_time);//时间
+        mDate = (TextView) view.findViewById(R.id.tv_time);//时间
         mInputMoney = (EditText) view.findViewById(R.id.et_input_money);//输入金额
         mOkBtn = (Button) view.findViewById(R.id.btn_ok);
         mCategoryTxt = (TextView) view.findViewById(R.id.tv_category);//选择标签
@@ -76,8 +75,8 @@ public class ExpendFragment extends Fragment {
     private void initData() {
         //默认显示系统时间
         long sysTime = System.currentTimeMillis();
-        CharSequence sysTimeStr = DateFormat.format("HH:mm", sysTime);
-        mTime.setText(sysTimeStr);
+        CharSequence sysTimeStr = DateFormat.format("yyyy-MM-dd", sysTime);
+        mDate.setText(sysTimeStr);
 
         mDatabase = new DatabaseHelper(getActivity());
         mCostBeanList = new ArrayList<>();
@@ -86,7 +85,7 @@ public class ExpendFragment extends Fragment {
     }
 
     private void initEvent() {
-        mTime.setOnClickListener(new View.OnClickListener() {
+        mDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 showTimeDialog();
@@ -110,7 +109,7 @@ public class ExpendFragment extends Fragment {
                     costBean.costCategory = mCategoryTxt.getText().toString();
                 }
                 costBean.costMoney = mInputMoney.getText().toString();
-                costBean.costDate = mTime.getText().toString();
+                costBean.costDate = mDate.getText().toString();
                 costBean.costType = mExpendButton.getText().toString();//保存支出类型到数据库
                 costBean.costRemark = mRemarkEdt.getText().toString();//保存备注到数据库
                 mDatabase.insertCost(costBean);
@@ -150,9 +149,8 @@ public class ExpendFragment extends Fragment {
     }
 
     private void showTimeDialog() {
-        DialogFragment newFragment = new TimePickerFragment();
-        newFragment.show(getFragmentManager(), TIME_PICKER);
-
+        DialogFragment newFragment = new DatePickerFragment();
+        newFragment.show(getFragmentManager(), "datePicker");
 
     }
 

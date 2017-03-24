@@ -33,9 +33,9 @@ public class IncomeFragment extends Fragment {
     public static final String MONEY = "money";
     public static final String CATEGORY = "category";
     public static final String REMARK = "remark";
-    public static final String TIME_PICKER = "timePicker";
+    public static final String DATE_PICKER = "datePicker";
     private EditText mInputMoney;
-    private TextView mTime;
+    private TextView mDate;
     private View view;
     private TextView mCategoryTxt;
     private Button mOkBtn;
@@ -63,7 +63,7 @@ public class IncomeFragment extends Fragment {
 
     private void initView() {
         mInputMoney = (EditText) view.findViewById(R.id.et_income_input_money);
-        mTime = (TextView) view.findViewById(R.id.tv_time);
+        mDate = (TextView) view.findViewById(R.id.tv_time);
         mCategoryTxt = (TextView) view.findViewById(R.id.tv_category);
         mOkBtn = (Button) view.findViewById(R.id.btn_ok);
         mRemarkEdt = (EditText) view.findViewById(R.id.et_remark);
@@ -76,8 +76,8 @@ public class IncomeFragment extends Fragment {
     private void initData() {
         //默认显示系统时间
         long sysTime = System.currentTimeMillis();
-        CharSequence sysTimeStr = DateFormat.format("HH:mm", sysTime);
-        mTime.setText(sysTimeStr);
+        CharSequence sysTimeStr = DateFormat.format("yyyy-MM-dd", sysTime);
+        mDate.setText(sysTimeStr);
 
         mDatabase = new DatabaseHelper(getActivity());
         mCostBeanList = new ArrayList<>();
@@ -87,7 +87,7 @@ public class IncomeFragment extends Fragment {
     }
 
     private void initEvent() {
-        mTime.setOnClickListener(new View.OnClickListener() {
+        mDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 showTimeDialog();
@@ -105,14 +105,13 @@ public class IncomeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 CostBean costBean = new CostBean();
-//                costBean.costCategory = (String) mCategory.getSelectedItem();
                 if (mCategoryTxt.getText().equals("")){
                     costBean.costCategory = mCategoryTxt.getHint().toString();
                 }else {
                     costBean.costCategory = mCategoryTxt.getText().toString();
                 }
                 costBean.costMoney = mInputMoney.getText().toString();
-                costBean.costDate = mTime.getText().toString();
+                costBean.costDate = mDate.getText().toString();
                 costBean.costType = mIncomeButton.getText().toString();
                 costBean.costRemark = mRemarkEdt.getText().toString();
                 mDatabase.insertCost(costBean);
@@ -152,10 +151,8 @@ public class IncomeFragment extends Fragment {
         mRemarkEdt.setText(intent.getStringExtra(REMARK));
     }
     private void showTimeDialog() {
-        DialogFragment newFragment = new TimePickerFragment();
-        newFragment.show(getFragmentManager(), TIME_PICKER);
-
-
+        DialogFragment newFragment = new DatePickerFragment();
+        newFragment.show(getFragmentManager(), DATE_PICKER);
     }
 
     private void finish(){
