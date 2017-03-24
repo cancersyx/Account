@@ -18,14 +18,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/all_income"
-            android:textSize="20sp" />
+            android:textSize="@dimen/word_main" />
 
         <TextView
             android:id="@+id/tv_all_income"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="2000"
-            android:textSize="20sp"
+            android:textSize="@dimen/word_main"
             android:textStyle="bold" />
 
         <TextView
@@ -33,7 +33,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
             android:text="@string/yuan"
-            android:textSize="20sp" />
+            android:textSize="@dimen/word_main" />
     </LinearLayout>
 
 
@@ -42,21 +42,21 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/ll_all_income"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="@dimen/distance_main"
         android:orientation="horizontal">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/all_expend"
-            android:textSize="20sp" />
+            android:textSize="@dimen/word_main" />
 
         <TextView
             android:id="@+id/tv_all_expend"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="1000"
-            android:textSize="20sp"
+            android:textSize="@dimen/word_main"
             android:textStyle="bold" />
 
         <TextView
@@ -64,7 +64,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
             android:text="@string/yuan"
-            android:textSize="20sp" />
+            android:textSize="@dimen/word_main" />
     </LinearLayout>
 
     <FrameLayout
@@ -85,7 +85,7 @@
             android:layout_gravity="center"
             android:text="1000"
             android:gravity="center"
-            android:textSize="16sp"
+            android:textSize="@dimen/word_small"
             android:textColor="@color/white" />
     </FrameLayout>
 

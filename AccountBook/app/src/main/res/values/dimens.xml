@@ -5,6 +5,15 @@
     <dimen name="fab_margin">16dp</dimen>
 
     <dimen name="pie_chart_text1_size">42sp</dimen>
+
     <dimen name="pie_chart_text2_size">16dp</dimen>
+
+
+    <dimen name="word_main">20sp</dimen>
+    <dimen name="word_small">16sp</dimen>
+    <dimen name="word_big">25sp</dimen>
+
+    <dimen name="distance_main">10dp</dimen>
+
 
 </resources>

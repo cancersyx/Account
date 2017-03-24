@@ -12,8 +12,8 @@
         android:layout_centerInParent="true"
         android:orientation="horizontal"
         android:layout_marginTop="50dp"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp">
+        android:paddingLeft="@dimen/distance_main"
+        android:paddingRight="@dimen/distance_main">
 
         <Button
             android:id="@+id/btn_income"
@@ -47,7 +47,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:layout_marginTop="10dp">
+        android:layout_marginTop="@dimen/distance_main">
 
     </LinearLayout>
 

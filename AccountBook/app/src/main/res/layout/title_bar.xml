@@ -7,7 +7,7 @@
     <ImageView
         android:id="@+id/iv_back"
         android:layout_width="35dp"
-        android:paddingLeft="10dp"
+        android:paddingLeft="@dimen/distance_main"
         android:layout_height="45dp"
         android:layout_centerVertical="true"
         android:src="@drawable/back"/>
@@ -17,7 +17,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:textSize="20sp"
+        android:textSize="@dimen/word_main"
         android:textColor="@color/white"
         android:textStyle="bold"
         android:text="@string/app_name"/>

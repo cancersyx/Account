@@ -29,9 +29,9 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center|left"
-            android:paddingLeft="10dp"
+            android:paddingLeft="@dimen/distance_main"
             android:text="@string/details"
-            android:textSize="18sp"
+            android:textSize="@dimen/word_main"
             android:textStyle="bold" />
 
         <TextView
@@ -41,7 +41,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="@string/date"
-            android:textSize="18sp"
+            android:textSize="@dimen/word_main"
             android:textStyle="bold" />
 
         <TextView
@@ -50,7 +50,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="@string/money"
-            android:textSize="18sp"
+            android:textSize="@dimen/word_main"
             android:textStyle="bold" />
 
     </LinearLayout>

@@ -14,7 +14,7 @@
         android:singleLine="true"
         android:text="costTitle"
         android:gravity="left|center"
-        android:textSize="20sp" />
+        android:textSize="@dimen/word_small" />
 
     <TextView
         android:id="@+id/tv_date"
@@ -27,7 +27,7 @@
         android:singleLine="true"
         android:text="costDate"
         android:gravity="center"
-        android:textSize="20sp" />
+        android:textSize="@dimen/word_small" />
 
     <TextView
         android:id="@+id/tv_money"
@@ -39,12 +39,12 @@
         android:singleLine="true"
         android:gravity="center|right"
         android:text="costMoney"
-        android:textSize="20sp" />
+        android:textSize="@dimen/word_small" />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="50dp"
         android:gravity="center"
         android:text="@string/yuan"
-        android:paddingRight="10dp"
-        android:textSize="20sp"/>
+        android:paddingRight="@dimen/distance_main"
+        android:textSize="@dimen/word_small"/>
 </LinearLayout>

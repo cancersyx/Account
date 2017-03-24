@@ -16,7 +16,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/money_colon"
-            android:textSize="20sp" />
+            android:textSize="@dimen/word_main" />
 
         <EditText
             android:id="@+id/et_income_input_money"
@@ -27,7 +27,7 @@
             android:paddingLeft="5dp"
             android:hint="0.00"
             android:inputType="number"
-            android:textSize="20sp" />
+            android:textSize="@dimen/word_main" />
     </LinearLayout>
 
     <LinearLayout
@@ -41,7 +41,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/date_colon"
-            android:textSize="20sp" />
+            android:textSize="@dimen/word_main" />
 
         <TextView
             android:id="@+id/tv_time"
@@ -51,7 +51,7 @@
             android:gravity="center_vertical"
             android:paddingLeft="5dp"
             android:text="2017-7-1"
-            android:textSize="20sp" />
+            android:textSize="@dimen/word_main" />
 
     </LinearLayout>
 
@@ -66,7 +66,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/category_colon"
-            android:textSize="20sp" />
+            android:textSize="@dimen/word_main" />
 
         <TextView
             android:id="@+id/tv_category"
@@ -77,27 +77,27 @@
             android:gravity="center_vertical"
             android:paddingLeft="5dp"
             android:textStyle="bold"
-            android:textSize="20sp" />
+            android:textSize="@dimen/word_main" />
     </LinearLayout>
 
     <EditText
         android:id="@+id/et_remark"
         android:layout_width="match_parent"
         android:layout_height="200dp"
-        android:layout_margin="10dp"
+        android:layout_margin="@dimen/distance_main"
         android:background="@drawable/stroke_blue"
         android:gravity="left"
         android:hint="@string/hint"
         android:padding="5dp"
         android:textColorHint="@color/gray"
-        android:textSize="20sp" />
+        android:textSize="@dimen/word_main" />
 
     <Button
         android:id="@+id/btn_ok"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/sure"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
+        android:layout_marginLeft="@dimen/distance_main"
+        android:layout_marginRight="@dimen/distance_main"
         android:background="@drawable/stroke_blue"/>
 </LinearLayout>
