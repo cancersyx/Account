@@ -157,7 +157,7 @@ public class MainActivity extends AppCompatActivity {
             for (int i = 0; i < allData.size(); i++) {
                 CostBean costBean = allData.get(i);
                 String costCategory = costBean.costCategory;
-                int costMoney = Integer.parseInt(costBean.costMoney);
+                int costMoney = Integer.valueOf(costBean.costMoney.trim());
                 if (!table.containsKey(costCategory)) {
                     table.put(costCategory, costMoney);
                 } else {

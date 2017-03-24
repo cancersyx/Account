@@ -7,6 +7,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.zsf.accountbook.R;
 import com.zsf.accountbook.activity.MainActivity;
@@ -33,6 +36,7 @@ public class ExpendFragment extends Fragment {
     public static final String MONEY = "money";
     public static final String CATEGORY = "category";
     public static final String REMARK = "remark";
+    public static final String DATE_PICKER = "datePicker";
     private View view;
     private TextView mDate;
     private Button mOkBtn;
@@ -102,21 +106,49 @@ public class ExpendFragment extends Fragment {
         mOkBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                CostBean costBean = new CostBean();
-                if (mCategoryTxt.getText().equals("")){
-                    costBean.costCategory = mCategoryTxt.getHint().toString();
+
+                if ("".equals(mInputMoney.getText().toString().trim()) ||
+                        mInputMoney.getText().toString().trim().equals("0")){
+                    Toast.makeText(getActivity(),"金额不能为0",Toast.LENGTH_SHORT).show();
+                    return;
                 }else {
-                    costBean.costCategory = mCategoryTxt.getText().toString();
+                    CostBean costBean = new CostBean();
+                    if (mCategoryTxt.getText().equals("")){
+                        costBean.costCategory = mCategoryTxt.getHint().toString();
+                    }else {
+                        costBean.costCategory = mCategoryTxt.getText().toString();
+                    }
+                    costBean.costMoney = mInputMoney.getText().toString().trim();
+                    costBean.costDate = mDate.getText().toString();
+                    costBean.costType = mExpendButton.getText().toString();//保存支出类型到数据库
+                    costBean.costRemark = mRemarkEdt.getText().toString();//保存备注到数据库
+                    mDatabase.insertCost(costBean);
+                    mCostBeanList.add(costBean);
+                    mAdapter.notifyDataSetChanged();
+                    startActivity(new Intent(getActivity(), MainActivity.class));
+                    finish();
                 }
-                costBean.costMoney = mInputMoney.getText().toString();
-                costBean.costDate = mDate.getText().toString();
-                costBean.costType = mExpendButton.getText().toString();//保存支出类型到数据库
-                costBean.costRemark = mRemarkEdt.getText().toString();//保存备注到数据库
-                mDatabase.insertCost(costBean);
-                mCostBeanList.add(costBean);
-                mAdapter.notifyDataSetChanged();
-                startActivity(new Intent(getActivity(), MainActivity.class));
-                finish();
+            }
+        });
+
+        mInputMoney.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                String str = mInputMoney.getText().toString().trim();
+
+                if(str.indexOf('0')==0){
+                    Toast.makeText(getActivity(), "请输入正确数字", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
@@ -150,7 +182,7 @@ public class ExpendFragment extends Fragment {
 
     private void showTimeDialog() {
         DialogFragment newFragment = new DatePickerFragment();
-        newFragment.show(getFragmentManager(), "datePicker");
+        newFragment.show(getFragmentManager(), DATE_PICKER);
 
     }
 

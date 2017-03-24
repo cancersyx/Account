@@ -7,6 +7,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.zsf.accountbook.R;
 import com.zsf.accountbook.activity.MainActivity;
@@ -57,6 +60,7 @@ public class IncomeFragment extends Fragment {
         initData();
         initEvent();
         getData();
+
         return view;
     }
 
@@ -104,23 +108,53 @@ public class IncomeFragment extends Fragment {
         mOkBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                CostBean costBean = new CostBean();
-                if (mCategoryTxt.getText().equals("")){
-                    costBean.costCategory = mCategoryTxt.getHint().toString();
+
+                if ("".equals(mInputMoney.getText().toString().trim()) ||
+                        mInputMoney.getText().toString().trim().equals("0")){
+                    Toast.makeText(getActivity(),"金额不能为0",Toast.LENGTH_SHORT).show();
+                    return;
                 }else {
-                    costBean.costCategory = mCategoryTxt.getText().toString();
+                    CostBean costBean = new CostBean();
+                    if (mCategoryTxt.getText().equals("")){
+                        costBean.costCategory = mCategoryTxt.getHint().toString();
+                    }else {
+                        costBean.costCategory = mCategoryTxt.getText().toString();
+                    }
+                    costBean.costMoney = mInputMoney.getText().toString();
+                    costBean.costDate = mDate.getText().toString();
+                    costBean.costType = mIncomeButton.getText().toString();
+                    costBean.costRemark = mRemarkEdt.getText().toString();
+                    mDatabase.insertCost(costBean);
+                    mCostBeanList.add(costBean);
+                    mAdapter.notifyDataSetChanged();
+                    startActivity(new Intent(getActivity(), MainActivity.class));
+                    finish();
                 }
-                costBean.costMoney = mInputMoney.getText().toString();
-                costBean.costDate = mDate.getText().toString();
-                costBean.costType = mIncomeButton.getText().toString();
-                costBean.costRemark = mRemarkEdt.getText().toString();
-                mDatabase.insertCost(costBean);
-                mCostBeanList.add(costBean);
-                mAdapter.notifyDataSetChanged();
-                startActivity(new Intent(getActivity(), MainActivity.class));
-                finish();
+
             }
         });
+
+        mInputMoney.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                String str = mInputMoney.getText().toString().trim();
+
+                if(str.indexOf('0')==0){
+                    Toast.makeText(getActivity(), "请输入正确数字", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
 
 
     }
