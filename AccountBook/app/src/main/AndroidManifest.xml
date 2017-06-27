@@ -23,12 +23,14 @@
 
         <activity android:name=".activity.ChartActivity"/>
         <activity android:name=".activity.MainActivity"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/AppTheme.NoActionBar" android:launchMode="singleTask">
+        </activity>
         <activity android:name=".activity.WelcomeGuideActivity"/>
         <activity android:name=".activity.MarkAccountActivity" />
         <activity android:name=".activity.AboutMeActivity"/>
         <activity android:name=".activity.SettingsActivity"/>
         <activity android:name=".activity.MoreActivity"/>
+        <activity android:name=".activity.BaseActivity" android:theme="@style/AppTheme.NoActionBar"/>
     </application>
 
 </manifest>

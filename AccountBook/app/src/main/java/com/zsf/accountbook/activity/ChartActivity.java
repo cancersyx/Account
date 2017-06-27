@@ -1,6 +1,5 @@
 package com.zsf.accountbook.activity;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -14,7 +13,7 @@ import com.zsf.accountbook.R;
  * Created by zsf.
  */
 
-public class ChartActivity extends Activity {
+public class ChartActivity extends BaseActivity {
     private Button mExpendChartBtn;
     private Button mIncomeChartBtn;
     private FrameLayout mContainer;

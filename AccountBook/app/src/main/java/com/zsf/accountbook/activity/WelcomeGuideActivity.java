@@ -1,6 +1,5 @@
 package com.zsf.accountbook.activity;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
@@ -11,9 +10,9 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
-import com.zsf.accountbook.constans.AppConstants;
-import com.zsf.accountbook.adapter.GuideViewPagerAdapter;
 import com.zsf.accountbook.R;
+import com.zsf.accountbook.adapter.GuideViewPagerAdapter;
+import com.zsf.accountbook.constans.AppConstants;
 import com.zsf.accountbook.utils.SpUtils;
 
 import java.util.ArrayList;
@@ -23,7 +22,7 @@ import java.util.List;
  * Created by zsf.
  */
 
-public class WelcomeGuideActivity extends Activity implements View.OnClickListener {
+public class WelcomeGuideActivity extends BaseActivity implements View.OnClickListener {
 
     private ViewPager vp;
     private GuideViewPagerAdapter adapter;

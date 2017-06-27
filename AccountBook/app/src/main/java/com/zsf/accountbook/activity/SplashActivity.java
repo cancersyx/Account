@@ -1,20 +1,19 @@
 package com.zsf.accountbook.activity;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.WindowManager;
 
-import com.zsf.accountbook.constans.AppConstants;
 import com.zsf.accountbook.R;
+import com.zsf.accountbook.constans.AppConstants;
 import com.zsf.accountbook.utils.SpUtils;
 
 /**
  * Created by zsf.
  */
 
-public class SplashActivity extends Activity {
+public class SplashActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

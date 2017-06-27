@@ -1,6 +1,5 @@
 package com.zsf.accountbook.activity;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -12,7 +11,7 @@ import com.zsf.accountbook.R;
  * Created by zsf on 2017/3/16.
  */
 
-public class SettingsActivity extends Activity {
+public class SettingsActivity extends BaseActivity {
 
     private ImageView mBack;
     private TextView mTitle;

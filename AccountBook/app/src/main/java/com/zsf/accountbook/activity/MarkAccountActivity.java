@@ -1,6 +1,5 @@
 package com.zsf.accountbook.activity;
 
-import android.app.Activity;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Intent;
@@ -20,7 +19,7 @@ import com.zsf.accountbook.fragment.IncomeFragment;
  *
  */
 
-public class MarkAccountActivity extends Activity implements View.OnClickListener {
+public class MarkAccountActivity extends BaseActivity implements View.OnClickListener {
 
     public static final String TYPE = "type";
     private Button incomeBtn;
