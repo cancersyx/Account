@@ -325,11 +325,10 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
                 overridePendingTransition(R.anim.operate_in, R.anim.operate_out);
                 break;
-//            case R.id.settings:
-//                  TODO 增加设计模块
-//                startActivity(new Intent(this, SettingsActivity.class));
-//                overridePendingTransition(R.anim.operate_in,R.anim.operate_out);
-//                break;
+            case R.id.settings:
+                startActivity(new Intent(this, SettingsActivity.class));
+                overridePendingTransition(R.anim.operate_in,R.anim.operate_out);
+                break;
 //            case R.id.more:
 //                //TODO 增加更多功能的模块
 //                startActivity(new Intent(this, MoreActivity.class));
