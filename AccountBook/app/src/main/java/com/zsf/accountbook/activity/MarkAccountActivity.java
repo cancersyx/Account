@@ -119,4 +119,10 @@ public class MarkAccountActivity extends BaseActivity implements View.OnClickLis
         super.onDestroy();
 
     }
+
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(this,MainActivity.class));
+        finish();
+    }
 }
