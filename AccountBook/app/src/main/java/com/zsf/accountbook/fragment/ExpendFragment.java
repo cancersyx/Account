@@ -19,7 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.zsf.accountbook.R;
-import com.zsf.accountbook.activity.MainActivity;
+import com.zsf.accountbook.activity.MainNewActivity;
 import com.zsf.accountbook.adapter.CostListAdapter;
 import com.zsf.accountbook.db.DatabaseHelper;
 import com.zsf.accountbook.model.CostBean;
@@ -31,7 +31,7 @@ import java.util.List;
  * Created by zsf.
  * 支出
  */
-
+@Deprecated
 public class ExpendFragment extends Fragment {
     public static final String MONEY = "money";
     public static final String CATEGORY = "category";
@@ -125,7 +125,7 @@ public class ExpendFragment extends Fragment {
                     mDatabase.insertCost(costBean);
                     mCostBeanList.add(costBean);
                     mAdapter.notifyDataSetChanged();
-                    startActivity(new Intent(getActivity(), MainActivity.class));
+                    startActivity(new Intent(getActivity(), MainNewActivity.class));
                     finish();
                 }
             }

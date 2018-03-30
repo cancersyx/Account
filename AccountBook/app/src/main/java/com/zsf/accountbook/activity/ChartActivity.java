@@ -11,8 +11,9 @@ import com.zsf.accountbook.R;
 
 /**
  * Created by zsf.
+ * 来记账1.0时代的饼形图界面
  */
-
+@Deprecated
 public class ChartActivity extends BaseActivity {
     private Button mExpendChartBtn;
     private Button mIncomeChartBtn;

@@ -10,7 +10,7 @@
         android:paddingLeft="@dimen/distance_main"
         android:layout_height="45dp"
         android:layout_centerVertical="true"
-        android:src="@drawable/back"/>
+        android:src="@drawable/icon_back"/>
 
     <TextView
         android:id="@+id/tv_title"

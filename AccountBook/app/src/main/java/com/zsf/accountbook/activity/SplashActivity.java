@@ -44,7 +44,9 @@ public class SplashActivity extends BaseActivity {
     }
 
     private void enterHomeActivity() {
-        Intent intent = new Intent(this, MainActivity.class);
+        // TODO: 2018/3/20 ，是否设置了密码，如果设置了就走LoginActivity,否则进主页
+
+        Intent intent = new Intent(this, MainNewActivity.class);
         startActivity(intent);
         finish();
 

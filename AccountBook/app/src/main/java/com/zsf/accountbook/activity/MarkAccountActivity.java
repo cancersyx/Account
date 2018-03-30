@@ -18,7 +18,7 @@ import com.zsf.accountbook.fragment.IncomeFragment;
  * Created by zsf.
  *
  */
-
+@Deprecated
 public class MarkAccountActivity extends BaseActivity implements View.OnClickListener {
 
     public static final String TYPE = "type";
@@ -60,7 +60,7 @@ public class MarkAccountActivity extends BaseActivity implements View.OnClickLis
         mBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MarkAccountActivity.this,MainActivity.class));
+                startActivity(new Intent(MarkAccountActivity.this,MainNewActivity.class));
             }
         });
     }
@@ -122,7 +122,7 @@ public class MarkAccountActivity extends BaseActivity implements View.OnClickLis
 
     @Override
     public void onBackPressed() {
-        startActivity(new Intent(this,MainActivity.class));
+        startActivity(new Intent(this,MainNewActivity.class));
         finish();
     }
 }

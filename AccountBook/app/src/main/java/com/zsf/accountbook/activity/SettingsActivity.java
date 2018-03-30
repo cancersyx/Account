@@ -15,6 +15,7 @@ import com.zsf.accountbook.R;
  * Created by zsf on 2017/3/16.
  */
 
+@Deprecated
 public class SettingsActivity extends BaseActivity {
 
     private ImageView mBack;

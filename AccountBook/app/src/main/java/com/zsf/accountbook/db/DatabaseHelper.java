@@ -12,6 +12,7 @@ import com.zsf.accountbook.model.CostBean;
  * Created by zsf on 2017/2/28.
  */
 
+@Deprecated
 public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String CREATE_COST = "create table cost ("
             + "id integer primary key autoincrement,"
