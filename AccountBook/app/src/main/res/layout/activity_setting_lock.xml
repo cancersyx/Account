@@ -15,8 +15,8 @@
         android:text="绘制解锁图案"/>
 
     <com.zsf.accountbook.view.LockPatternView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         />
 
 

@@ -149,6 +149,7 @@ public class AddExpendActivity extends BaseActivity {
     }
 
     private void initLocation(){
+        Log.d("zsf","======================================");
         //初始化client
         locationClient = new AMapLocationClient(this.getApplicationContext());
         locationOption = getDefaultOption();
@@ -165,9 +166,10 @@ public class AddExpendActivity extends BaseActivity {
      *
      */
     private AMapLocationClientOption getDefaultOption(){
+        Log.d("zsf", "getDefaultOption: ");
         AMapLocationClientOption mOption = new AMapLocationClientOption();
         mOption.setLocationMode(AMapLocationClientOption.AMapLocationMode.Hight_Accuracy);//可选，设置定位模式，可选的模式有高精度、仅设备、仅网络。默认为高精度模式
-        mOption.setGpsFirst(false);//可选，设置是否gps优先，只在高精度模式下有效。默认关闭
+        mOption.setGpsFirst(true);//可选，设置是否gps优先，只在高精度模式下有效。默认关闭
         mOption.setHttpTimeOut(30000);//可选，设置网络请求超时时间。默认为30秒。在仅设备模式下无效
         mOption.setInterval(2000);//可选，设置定位间隔。默认为2秒
         mOption.setNeedAddress(true);//可选，设置是否返回逆地理地址信息。默认是true
@@ -180,55 +182,16 @@ public class AddExpendActivity extends BaseActivity {
         return mOption;
     }
 
-    /**
-     * 定位监听
-     */
     AMapLocationListener locationListener = new AMapLocationListener() {
         @Override
         public void onLocationChanged(AMapLocation location) {
-            if (null != location) {
-                // TODO: 2018/3/18 真机测试定位
-                String city = location.getCity();
-                mInputAddress.setText(city);
+            String city = location.getCity();
+            Log.d("zsf","city = " + city);
+            mInputAddress.setText(city);
+            Toast.makeText(AddExpendActivity.this,"city = " + city,Toast.LENGTH_SHORT).show();
 
-                //errCode等于0代表定位成功，其他的为定位失败，具体的可以参照官网定位错误码说明
-                if(location.getErrorCode() == 0){
-                    Log.d("zsf","定位成功" + "\n");
-                    Log.d("zsf","定位类型: " + location.getLocationType() + "\n");
-                    Log.d("zsf","经    度    : " + location.getLongitude() + "\n");
-                    Log.d("zsf","纬    度    : " + location.getLatitude() + "\n");
-                    Log.d("zsf","精    度    : " + location.getAccuracy() + "米" + "\n");
-                    Log.d("zsf","提供者    : " + location.getProvider() + "\n");
-
-                    Log.d("zsf","速    度    : " + location.getSpeed() + "米/秒" + "\n");
-                    Log.d("zsf","角    度    : " + location.getBearing() + "\n");
-                    // 获取当前提供定位服务的卫星个数
-                    Log.d("zsf","星    数    : " + location.getSatellites() + "\n");
-                    Log.d("zsf","国    家    : " + location.getCountry() + "\n");
-                    Log.d("zsf","省            : " + location.getProvince() + "\n");
-                    Log.d("zsf","市            : " + location.getCity() + "\n");
-                    Log.d("zsf","城市编码 : " + location.getCityCode() + "\n");
-                    Log.d("zsf","区            : " + location.getDistrict() + "\n");
-                    Log.d("zsf","区域 码   : " + location.getAdCode() + "\n");
-                    Log.d("zsf","地    址    : " + location.getAddress() + "\n");
-                    Log.d("zsf","兴趣点    : " + location.getPoiName() + "\n");
-                } else {
-                    //定位失败
-                    Log.d("zsf","定位失败" + "\n");
-                    Log.d("zsf","错误码:" + location.getErrorCode() + "\n");
-                    Log.d("zsf","错误信息:" + location.getErrorInfo() + "\n");
-                    Log.d("zsf","错误描述:" + location.getLocationDetail() + "\n");
-                }
-                Log.d("zsf","***定位质量报告***");
-                String temp = (location.getLocationQualityReport().isWifiAble() ? "开启":"关闭");
-                Log.d("zsf","* WIFI开关："  + temp);
-                int temp2 = location.getLocationQualityReport().getGPSSatellites();
-                Log.d("zsf","* GPS星数：" +temp2);
-
-            }
         }
     };
-
 
     /**
      * 显示最新位置

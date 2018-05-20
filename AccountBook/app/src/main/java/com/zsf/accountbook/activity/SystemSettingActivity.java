@@ -49,6 +49,7 @@ public class SystemSettingActivity extends BaseActivity{
             }
         });
 
+        //换肤
         findViewById(R.id.rl_setting_theme).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

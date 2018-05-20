@@ -24,7 +24,7 @@ import com.zsf.accountbook.model.IncomeTable;
  * 2017/9/21
  * describe:
  */
-
+@Deprecated
 public class InfoDetailsActivity extends BaseActivity{
     private TextView mDeleteTxt;
     private TextView mTitle;

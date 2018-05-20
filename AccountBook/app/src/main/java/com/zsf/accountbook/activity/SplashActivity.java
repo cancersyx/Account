@@ -7,6 +7,7 @@ import android.view.WindowManager;
 
 import com.zsf.accountbook.R;
 import com.zsf.accountbook.constans.AppConstants;
+import com.zsf.accountbook.dao.PasswordDao;
 import com.zsf.accountbook.utils.SpUtils;
 
 /**
@@ -45,9 +46,14 @@ public class SplashActivity extends BaseActivity {
 
     private void enterHomeActivity() {
         // TODO: 2018/3/20 ，是否设置了密码，如果设置了就走LoginActivity,否则进主页
-
-        Intent intent = new Intent(this, MainNewActivity.class);
-        startActivity(intent);
+        PasswordDao passwordDao = new PasswordDao(SplashActivity.this);
+        if (!passwordDao.find().getPassword().isEmpty()) {
+            Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
+            startActivity(intent);
+        } else {
+            Intent intent = new Intent(this, MainNewActivity.class);
+            startActivity(intent);
+        }
         finish();
 
     }

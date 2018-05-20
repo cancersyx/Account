@@ -40,7 +40,7 @@ public class ManagerMoneyActivity extends AppCompatActivity {
         title.setText("理财常识");
 
 
-        findViewById(R.id.btn_quanxi).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.btn_book_1).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(ManagerMoneyActivity.this,ManagerMoneyDetailsActivity.class);

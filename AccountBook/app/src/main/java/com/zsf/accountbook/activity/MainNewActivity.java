@@ -2,14 +2,22 @@ package com.zsf.accountbook.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
+import android.widget.ImageView;
 
 import com.zsf.accountbook.R;
+import com.zsf.accountbook.adapter.GuideViewPagerAdapter;
 import com.zsf.accountbook.adapter.PictureAdapter;
 import com.zsf.accountbook.widget.CustomDialog;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author EWorld
@@ -22,6 +30,19 @@ public class MainNewActivity extends AppCompatActivity {
     private GridView mGridView;
     private String[] mTitles;
     private int[] mImages;
+    private ViewPager mViewPager;
+    private int vpSize;
+
+    private Handler mHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            if (msg.what == 0) {
+                mViewPager.setCurrentItem((mViewPager.getCurrentItem() + 1) % vpSize );
+                sendEmptyMessageDelayed(0, 2000);
+            }
+        }
+    };
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,14 +59,33 @@ public class MainNewActivity extends AppCompatActivity {
         mImages = new int[]{R.drawable.icon_add_expend, R.drawable.icon_add_income,
                 R.drawable.icon_my_expend, R.drawable.icon_my_income, R.drawable.icon_data_manage,
                 R.drawable.icon_system_setting, R.drawable.icon_memo, R.drawable.icon_help,
-                R.drawable.icon_exit,R.mipmap.ic_launcher,R.mipmap.ic_launcher};
+                R.drawable.icon_exit,R.drawable.icon_tool,R.drawable.icon_manager_money};
     }
 
     private void initViews() {
+        initBanner();
         mGridView = (GridView) findViewById(R.id.gv_main);
 
         PictureAdapter adapter = new PictureAdapter(mTitles, mImages, this);
         mGridView.setAdapter(adapter);
+
+    }
+
+    private void initBanner() {
+        mViewPager = (ViewPager) findViewById(R.id.banner_view_pager);
+        int[] images = {R.drawable.banner_2,R.drawable.img1,R.drawable.banner_2};
+        List<View> viewList = new ArrayList<>();
+
+        for (int i = 0; i < images.length; i++) {
+            View view = getLayoutInflater().inflate(R.layout.cell_banner,null);
+            ImageView bannerItem = (ImageView) view.findViewById(R.id.banner_item_view);
+            bannerItem.setBackground(getResources().getDrawable(images[i]));
+            viewList.add(view);
+        }
+        mViewPager.setAdapter(new GuideViewPagerAdapter(viewList));
+        vpSize=viewList.size();
+        mViewPager.setCurrentItem(0);
+        mHandler.sendEmptyMessageDelayed(0, 5000);
 
     }
 
@@ -58,7 +98,6 @@ public class MainNewActivity extends AppCompatActivity {
                     case 0:
                         intent = new Intent(MainNewActivity.this, AddExpendActivity.class);
                         startActivity(intent);
-                        overridePendingTransition(R.anim.operate_in,R.anim.operate_out);
                         break;
                     case 1:
                         intent = new Intent(MainNewActivity.this, AddIncomeActivity.class);
